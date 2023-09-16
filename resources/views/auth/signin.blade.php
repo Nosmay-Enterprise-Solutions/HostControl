@@ -54,7 +54,7 @@
         <div class="col-12 col-lg-6 col-xl-8 d-none d-lg-block">
             <!-- Photo -->
             <div class="bg-cover h-100 min-vh-100"
-                style="background-image: url({{ asset('bank/photos/white-apple-imac-computer-with-elephant-mousepad.jpg') }})">
+                style="background-image: url({{ asset('bank/photos/cover-00.jpg') }})">
             </div>
         </div>
     </div>
