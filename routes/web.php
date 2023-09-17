@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PaymasterController;
+use App\Http\Controllers\PreferenceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,5 +17,12 @@ use App\Http\Controllers\DashboardController;
 |
 */
 
-Route::get('/', [AuthController::class, 'signIn'])->name('auth-signin');
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin-dashboard');
+Route::get('/', [AuthController::class, 'signIn'])->name('auth-signin')->middleware('guest');
+Route::post('/', [AuthController::class, 'authenticate'])->name('auth-signin')->middleware('guest');
+Route::get('/signout', [AuthController::class, 'dismiss'])->name('auth-signout');
+Route::get('/forgot-password', [AuthController::class, 'forgotPassword'])->name('auth-forgot-pass')->middleware('guest');
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin-dashboard')->middleware('auth');
+Route::get('/paymaster/applications', [PaymasterController::class, 'applications'])->name('admin-pm-app')->middleware('auth');
+
+Route::get('/preferences/system-users', [PreferenceController::class, 'users'])->name('admin-pr-users')->middleware('auth');

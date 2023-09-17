@@ -38,7 +38,7 @@
                 </div>
             </form>
             <div class="text-center text-muted mt-3">
-                Forget it, <a href="./sign-in.html">send me back</a> to the sign in screen.
+                Forget it! <a href="{{route('auth-signin')}}">Send me back</a> to the sign in screen.
             </div>
         </div>
     </div>

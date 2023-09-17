@@ -1,7 +1,7 @@
 <div class="collapse navbar-collapse" id="sidebar-menu">
     <ul class="navbar-nav pt-lg-3">
         <li class="nav-item">
-            <a class="nav-link active" href="./">
+            <a class="nav-link @if (Route::is('admin-dashboard')) active @endif" href="{{route('admin-dashboard')}}">
                 <span
                     class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-layout-dashboard" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -18,7 +18,7 @@
             </a>
         </li>
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown"
+            <a class="nav-link dropdown-toggle {{ request()->segment(1) == 'paymaster' ? 'show' : '' }}" href="#navbar-base" data-bs-toggle="dropdown"
                 data-bs-auto-close="false" role="button" aria-expanded="false">
                 <span
                     class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/package -->
@@ -34,14 +34,43 @@
                     PayMaster
                 </span>
             </a>
-            <div class="dropdown-menu">
+            <div class="dropdown-menu {{ request()->segment(1) == 'paymaster' ? 'show' : '' }}">
                 <div class="dropdown-menu-columns">
                     <div class="dropdown-menu-column">
-                        <a class="dropdown-item" href="./empty.html">
-                            Empty page
+                        <a class="dropdown-item @if (Route::is('admin-pm-app')) active @endif" href="{{route('admin-pm-app')}}">
+                            Applications
                         </a>
-                        <a class="dropdown-item" href="./accordion.html">
-                            Accordion
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle {{ request()->segment(1) == 'preferences' ? 'show' : '' }}" href="#navbar-base" data-bs-toggle="dropdown"
+                data-bs-auto-close="false" role="button" aria-expanded="false">
+                <span
+                    class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/package -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-adjustments-alt" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M4 8h4v4h-4z"></path>
+                        <path d="M6 4l0 4"></path>
+                        <path d="M6 12l0 8"></path>
+                        <path d="M10 14h4v4h-4z"></path>
+                        <path d="M12 4l0 10"></path>
+                        <path d="M12 18l0 2"></path>
+                        <path d="M16 5h4v4h-4z"></path>
+                        <path d="M18 4l0 1"></path>
+                        <path d="M18 9l0 11"></path>
+                     </svg>
+                </span>
+                <span class="nav-link-title">
+                    Preferences
+                </span>
+            </a>
+            <div class="dropdown-menu {{ request()->segment(1) == 'preferences' ? 'show' : '' }}">
+                <div class="dropdown-menu-columns">
+                    <div class="dropdown-menu-column">
+                        <a class="dropdown-item @if (Route::is('admin-pr-users')) active @endif" href="{{route('admin-pr-users')}}">
+                            System Users
                         </a>
                     </div>
                 </div>

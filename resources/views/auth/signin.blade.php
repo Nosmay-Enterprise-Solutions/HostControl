@@ -16,20 +16,20 @@
                 <h2 class="h3 text-center mb-3">
                     Sign In
                 </h2>
-                <form action="./" method="get" autocomplete="off" novalidate>
+                <form method="post" autocomplete="off" novalidate>@csrf
                     <div class="mb-3">
-                        <label class="form-label">Email address</label>
-                        <input type="email" class="form-control" placeholder="Your Email" autocomplete="off">
+                        <label class="form-label">Email Address</label>
+                        <input type="email" class="form-control" placeholder="Your Email" name="email" value="{{ old('email') }}" required>
                     </div>
                     <div class="mb-2">
                         <label class="form-label">
                             Password
                             <span class="form-label-description">
-                                <a href="./forgot-password.html">I forgot password</a>
+                                <a href="{{route('auth-forgot-pass')}}">I forgot password</a>
                             </span>
                         </label>
                         <div class="input-group input-group-flat">
-                            <input type="password" class="form-control" placeholder="Your Password" autocomplete="off">
+                            <input type="password" class="form-control" placeholder="Your Password" name="password">
                             <span class="input-group-text">
                                 <a href="#" class="link-secondary" title="Show password"
                                     data-bs-toggle="tooltip"><!-- Download SVG icon from http://tabler-icons.io/i/eye -->
