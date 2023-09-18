@@ -108,7 +108,7 @@
                                                     @endif
                                                     <div class="flex-fill">
                                                         <div class="font-weight-medium">{{ $users->fname }}
-                                                            {{ $users->sname }}</div>
+                                                            {{ $users->lname }}</div>
                                                         <div class="text-muted"><a href="#"
                                                                 class="text-reset">{{ $users->email }}</a></div>
                                                     </div>
