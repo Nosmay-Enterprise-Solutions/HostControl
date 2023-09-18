@@ -132,7 +132,7 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                @if (empty($users->email_veirfied_at))
+                                                @if (is_null($users->email_veirfied_at))
                                                     <span class="badge badge-outline text-orange">Not Verified</span>
                                                 @else
                                                     <span class="badge badge-outline text-green">Verified</span>

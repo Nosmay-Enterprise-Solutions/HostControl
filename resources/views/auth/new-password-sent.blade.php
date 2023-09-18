@@ -9,7 +9,7 @@
         <div class="page page-center">
             <div class="container container-tight py-4">
                 <div class="text-center mb-4">
-                    <a href="." class="navbar-brand navbar-brand-autodark"><img src="./static/logo.svg" height="36"
+                    <a href="." class="navbar-brand navbar-brand-autodark"><img src="./static/logo.svg" height="64"
                             alt=""></a>
                 </div>
                 <div class="text-center">

@@ -6,6 +6,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- Favicons -->
+    <link href="{{ asset('bank/logo/favicon.svg') }}" rel="icon">
+
     <title>@yield('title') - HostControl | Nosmay Enterprise Solutions
     </title>
     <!-- CSS files -->
