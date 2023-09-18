@@ -7,6 +7,12 @@
 <body class=" d-flex flex-column bg-white">
     <script src="{{ asset('bank/js/demo-theme.min.js') }}"></script>
     <div class="row g-0 flex-fill">
+        <div class="col-12 col-lg-6 col-xl-8 d-none d-lg-block">
+            <!-- Photo -->
+            <div class="bg-cover h-100 min-vh-100"
+                style="background-image: url({{ asset('bank/photos/cover-00.jpg') }})">
+            </div>
+        </div>
         <div class="col-12 col-lg-6 col-xl-4 border-top-wide border-primary d-flex flex-column justify-content-center">
             <div class="container container-tight my-5 px-lg-5">
                 <div class="text-center mb-4">
@@ -20,13 +26,11 @@
                     <div class="mb-3">
                         <label class="form-label">Email Address</label>
                         <input type="email" class="form-control" placeholder="Your Email" name="email" value="{{ old('email') }}" required>
+                        <input type="hidden" name="status" id="status" value="1">
                     </div>
                     <div class="mb-2">
                         <label class="form-label">
                             Password
-                            <span class="form-label-description">
-                                <a href="{{route('auth-forgot-pass')}}">I forgot password</a>
-                            </span>
                         </label>
                         <div class="input-group input-group-flat">
                             <input type="password" class="form-control" placeholder="Your Password" name="password">
@@ -44,17 +48,14 @@
                                 </a>
                             </span>
                         </div>
+                        <span class="form-label-description mt-2 mb-3">
+                            <a href="{{route('auth-forgot-pass')}}">I forgot password</a>
+                        </span>
                     </div>
                     <div class="form-footer mt-4">
                         <button type="submit" class="btn btn-primary w-100">Sign in</button>
                     </div>
                 </form>
-            </div>
-        </div>
-        <div class="col-12 col-lg-6 col-xl-8 d-none d-lg-block">
-            <!-- Photo -->
-            <div class="bg-cover h-100 min-vh-100"
-                style="background-image: url({{ asset('bank/photos/cover-00.jpg') }})">
             </div>
         </div>
     </div>

@@ -85,6 +85,11 @@ return [
                 'log',
             ],
         ],
+
+        'from' => [
+            'address' => env('MAIL_FROM_ADDRESS', 'support@nosmay.com'),
+            'name' => env('MAIL_FROM_NAME', 'HostControl'),
+        ],
     ],
 
     /*
