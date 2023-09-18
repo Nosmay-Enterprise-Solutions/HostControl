@@ -134,7 +134,7 @@
                                             <td>
                                                 @if (empty($users->email_veirfied_at))
                                                     <span class="badge badge-outline text-orange">Not Verified</span>
-                                                @elseif ($users->status == 0)
+                                                @else
                                                     <span class="badge badge-outline text-green">Verified</span>
                                                 @endif
                                             </td>
