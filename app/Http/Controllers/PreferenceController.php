@@ -15,4 +15,9 @@ class PreferenceController extends Controller
             'users' => $data
         ]);
     }
+
+    public function profile()
+    {
+        return view('admin.preferences.profile');
+    }
 }

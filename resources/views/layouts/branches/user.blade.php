@@ -9,9 +9,8 @@
         </div>
     </a>
     <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-        <a href="./profile.html" class="dropdown-item">Profile</a>
+        <a href="{{route('admin-profile')}}" class="dropdown-item">Profile</a>
         <div class="dropdown-divider"></div>
-        <a href="./settings.html" class="dropdown-item">Settings</a>
         <a href="{{route('auth-signout')}}" class="dropdown-item">Logout</a>
     </div>
 </div>

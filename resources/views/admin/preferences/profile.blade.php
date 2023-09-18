@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Dashboard')
+@section('title', 'Profile')
 
 @section('content')<!-- Page header -->
     <div class="page-header d-print-none">
@@ -9,7 +9,7 @@
                 <div class="col">
                     <!-- Page pre-title -->
                     <div class="page-pretitle">
-                        @yield('domain')
+                        Preferences
                     </div>
                     <h2 class="page-title">
                         @yield('title')

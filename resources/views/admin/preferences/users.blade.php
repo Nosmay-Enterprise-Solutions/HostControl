@@ -11,7 +11,7 @@
                 <div class="col">
                     <!-- Page pre-title -->
                     <div class="page-pretitle">
-                        Pereferences
+                        Preferences
                     </div>
                     <h2 class="page-title">
                         Users
@@ -20,7 +20,7 @@
                 <!-- Page title actions -->
                 <div class="col-auto ms-auto d-print-none">
                     <div class="btn-list">
-                        <a href="#" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal"
+                        <button class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal"
                             data-bs-target="#modal-add-user">
                             <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
@@ -31,7 +31,7 @@
                                 <path d="M5 12l14 0" />
                             </svg>
                             Create New User
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -132,7 +132,7 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                @if (is_null($users->email_veirfied_at))
+                                                @if (is_null($users->email_verified_at))
                                                     <span class="badge badge-outline text-orange">Not Verified</span>
                                                 @else
                                                     <span class="badge badge-outline text-green">Verified</span>
@@ -140,7 +140,7 @@
                                             </td>
                                             <td class="text-end">
                                                 <span class="dropdown">
-                                                    <button class="btn dropdown-toggle align-text-top"
+                                                    <button class="btn btn-sm dropdown-toggle align-text-top"
                                                         data-bs-boundary="viewport"
                                                         data-bs-toggle="dropdown">Actions</button>
                                                     <div class="dropdown-menu dropdown-menu-end">

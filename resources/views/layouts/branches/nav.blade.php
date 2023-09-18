@@ -69,6 +69,9 @@
             <div class="dropdown-menu {{ request()->segment(1) == 'preferences' ? 'show' : '' }}">
                 <div class="dropdown-menu-columns">
                     <div class="dropdown-menu-column">
+                        <a class="dropdown-item @if (Route::is('admin-profile')) active @endif" href="{{route('admin-profile')}}">
+                            Profile
+                        </a>
                         <a class="dropdown-item @if (Route::is('admin-pr-users')) active @endif" href="{{route('admin-pr-users')}}">
                             System Users
                         </a>
