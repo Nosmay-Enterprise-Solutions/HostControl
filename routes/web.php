@@ -17,13 +17,14 @@ use App\Http\Controllers\PreferenceController;
 |
 */
 
-Route::get('/', function() {return view('admin.home');})->name('home')->middleware('guest');
+Route::get('/', function() {return view('admin.home');})->name('home');
 Route::get('/sign-in', [AuthController::class, 'signIn'])->name('auth-signin')->middleware('guest');
 Route::post('/sign-in', [AuthController::class, 'authenticate'])->name('auth-signin')->middleware('guest');
 Route::get('/signout', [AuthController::class, 'dismiss'])->name('auth-signout');
 Route::get('/forgot-password', [AuthController::class, 'forgotPassword'])->name('auth-forgot-pass')->middleware('guest');
 Route::post('/forgot-password', [AuthController::class, 'forgotPassVerify'])->name('auth-forgot-pass')->middleware('guest');
 Route::get('/new-password-sent', [AuthController::class, 'newPassSent'])->name('auth-new-pass-sent')->middleware('guest');
+Route::get('/verify-request', [AuthController::class, 'verifyRequest'])->name('auth-verify-request')->middleware('guest');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin-dashboard')->middleware('auth');
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\ForgotPassword;
+use App\Mail\VerifyAccount;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
@@ -11,6 +12,11 @@ use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
 {
+    // String Generator
+    function geneString($length = 30) {
+        return substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length/strlen($x)) )),1,$length);
+    }
+
     // Sign In
     public function signIn() {
         return view('auth.signin');
@@ -59,6 +65,7 @@ class AuthController extends Controller
     public function create_user(Request $io): RedirectResponse
     {
         // dd($io);
+        $token = substr(str_shuffle(str_repeat($x='01', ceil(64/strlen($x)) )),1,64);
         User::create([
             'lname' => $io->lname,
             'fname' => $io->fname,
@@ -68,16 +75,31 @@ class AuthController extends Controller
             'contact' => $io->contact,
             'status' => $io->status,
             'role' => $io->role,
-            'password' => 'hashed'
+            'password' => 'hashed',
+            'token' => $token
         ]);
+        $data = [
+            'name' => $io->fname,
+            'email' => $io->email,
+            'link' => route('auth-verify-request').'?bin=0011&token='.$token
+        ];
+        // Send Verification Email
+        Mail::to($io->email)->send(new VerifyAccount($data));
+
         return back();
     }
 
     public function forgotPassVerify(Request $io): RedirectResponse
     {
-        $verify = User::where('email', $io->nemail)->get()->count();
-        if($verify > 0){
-            Mail::to($io->nemail)->send(new ForgotPassword());
+        $verify = User::where('email', $io->nemail)->get();
+        if(count($verify) > 0){
+            $token = substr(str_shuffle(str_repeat($x='01', ceil(64/strlen($x)) )),1,64);
+            User::where('email', $io->nemail)->update(['token' => $token]);
+            $pass = [
+                'name' => $verify->first()->fname,
+                'link' => route('auth-verify-request').'?bin=0010&token='.$token
+            ];
+            Mail::to($io->nemail)->send(new ForgotPassword($pass));
             session(['fps-email' => $io->nemail]);
             return redirect()->route('auth-new-pass-sent');
         }
@@ -97,5 +119,10 @@ class AuthController extends Controller
         return view('auth.new-password-sent')->with([
             'email' => $email
         ]);
+    }
+
+    public function verifyRequest()
+    {
+        return '';
     }
 }

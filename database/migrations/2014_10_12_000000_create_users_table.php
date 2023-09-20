@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('contact', 16)->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('token', 64)->nullable();
             $table->rememberToken();
             $table->boolean('status')->default(1);
             $table->timestamps();

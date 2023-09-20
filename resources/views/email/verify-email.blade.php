@@ -111,7 +111,7 @@
     <!-- start preheader -->
     <div class="preheader"
         style="display: none; max-width: 0; max-height: 0; overflow: hidden; font-size: 1px; line-height: 1px; color: #fff; opacity: 0;">
-        New Password for Your Nosmay's HostControl Account.
+        Verify Your Nosmay's HostControl Account.
     </div>
     <!-- end preheader -->
 
@@ -159,7 +159,7 @@
                             style="padding: 36px 24px 0; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; border-top: 3px solid #d4dadf;">
                             <h1
                                 style="margin: 0; font-size: 26px; font-weight: 700; letter-spacing: -1px; line-height: 32px;">
-                                Hello {{$pass['name']}}!</h1>
+                                Hello {{$data['name']}}!</h1>
                         </td>
                     </tr>
                 </table>
@@ -186,9 +186,9 @@
                     <tr>
                         <td align="left" bgcolor="#ffffff"
                             style="padding: 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
-                            <p style="margin: 0;">Your forgot password request was successfully.</p>
-                            <p style="margin: 0;">Kindly <a href="{{$pass['link']}}"
-                                target="_blank">click here</a> to create a new password for your account.</p>
+                            <p style="margin: 0;">A Nosmay HostControl Account has been created for You.</p>
+                            <p style="margin: 0;">Click on <a href="{{$data['link']}}"
+                                target="_blank">verify</a> to verify your account.</p>
                         </td>
                     </tr>
                     <!-- end copy -->
@@ -238,7 +238,7 @@
                     <tr>
                         <td align="center" bgcolor="#e9ecef"
                             style="padding: 12px 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 20px; color: #666;">
-                            <p style="margin: 0;">You received this email because we received a request new password from your account. If you didn't request New Password, you can safely
+                            <p style="margin: 0;">You received this email because an account was created using your email. If you didn't request for an account, you can safely
                                 delete this email.</p>
                         </td>
                     </tr>
