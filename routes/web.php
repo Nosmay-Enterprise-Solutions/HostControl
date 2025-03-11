@@ -40,6 +40,7 @@ Route::get('/admin/administration', function () { return view('admin.administrat
 Route::get('/admin/administration/administrators', function () { return view('admin.administration.administrators'); }) ->name('admin.administration.administrators');
 Route::get('/admin/administration/roles', function () { return view('admin.administration.roles'); }) ->name('admin.administration.roles');
 Route::get('/admin/administration/partners', function () { return view('admin.administration.partners'); }) ->name('admin.administration.partners');
+Route::get('/admin/administration/locations', function () { return view('admin.administration.locations'); }) ->name('admin.administration.locations');
 
 // Customer Module
 Route::get('/customers/add', [CustomerController::class, 'customer_add'])->name('admin-customer-add')->middleware('auth');

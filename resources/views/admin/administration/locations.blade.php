@@ -2,7 +2,7 @@
 
 @section('domain', 'Administration')
 
-@section('title', 'Partners')
+@section('title', 'Locations')
 
 @section('content')
 
@@ -131,10 +131,15 @@
                                                 <tr>
                                                     <th class="w-1"><input class="form-check-input m-0 align-middle"
                                                             type="checkbox" aria-label="Select all invoices"></th>
-                                                    <th><button class="table-sort" data-sort="sort-city">Partner
+                                                    <th><button class="table-sort" data-sort="sort-city">Location
                                                             Name</button>
                                                     </th>
-                                                    <th><button class="table-sort" data-sort="sort-date">Customers</button>
+                                                    <th><button class="table-sort" data-sort="sort-city">Partner</button>
+                                                    </th>
+                                                    <th><button class="table-sort"
+                                                            data-sort="sort-date">Customers</button>
+                                                    </th>
+                                                    <th><button class="table-sort" data-sort="sort-date">Taxes</button>
                                                     </th>
                                                     <th class="text-end">Action</th>
                                                 </tr>
@@ -143,165 +148,16 @@
                                                 <tr>
                                                     <td><input class="form-check-input m-0 align-middle" type="checkbox"
                                                             aria-label="Select invoice"></td>
-                                                    <td class="sort-city">Any</td>
+                                                    <td class="sort-city">Accra</td>
+                                                    <td class="sort-date" data-date="1730273409">Nosmay Ghana</td>
                                                     <td class="sort-date" data-date="1730273409">0</td>
+                                                    <td class="sort-date" data-date="1730273409">27.7%</td>
                                                     <td class="text-end">
                                                         <div class="d-flex justify-content-end gap-2">
                                                             <!-- View Action -->
-                                                            <a href="" class="text-primary me-1" title="View"
-                                                                data-bs-toggle="modal" data-bs-target="#modal-edit">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                    height="24" viewBox="0 0 24 24" fill="none"
-                                                                    stroke="currentColor" stroke-width="2"
-                                                                    stroke-linecap="round" stroke-linejoin="round"
-                                                                    class="icon icon-tabler icons-tabler-outline icon-tabler-eye">
-                                                                    <path stroke="none" d="M0 0h24v24H0z"
-                                                                        fill="none" />
-                                                                    <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
-                                                                    <path
-                                                                        d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" />
-                                                                </svg>
-                                                            </a>
-                                                            <!-- Delete Action -->
-                                                            <a href="#" class="text-danger me-1"
-                                                                data-bs-toggle="modal" data-bs-target="#modal-danger"
-                                                                title="Delete">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                    height="24" viewBox="0 0 24 24" fill="none"
-                                                                    stroke="currentColor" stroke-width="2"
-                                                                    stroke-linecap="round" stroke-linejoin="round"
-                                                                    class="icon icon-tabler icons-tabler-outline icon-tabler-trash">
-                                                                    <path stroke="none" d="M0 0h24v24H0z"
-                                                                        fill="none" />
-                                                                    <path d="M4 7l16 0" />
-                                                                    <path d="M10 11l0 6" />
-                                                                    <path d="M14 11l0 6" />
-                                                                    <path
-                                                                        d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
-                                                                    <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
-                                                                </svg>
-                                                            </a>
-                                                        </div>
-                                                    </td>
-                                                    {{-- <td class="text-end">
-                                                        <span class="dropdown">
-                                                            <button class="btn dropdown-toggle align-text-top"
-                                                                data-bs-boundary="viewport" data-bs-toggle="dropdown"
-                                                                aria-expanded="false"><svg
-                                                                    xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                    height="24" viewBox="0 0 24 24" fill="none"
-                                                                    stroke="currentColor" stroke-width="2"
-                                                                    stroke-linecap="round" stroke-linejoin="round"
-                                                                    class="icon icon-tabler icons-tabler-outline icon-tabler-edit">
-                                                                    <path stroke="none" d="M0 0h24v24H0z"
-                                                                        fill="none" />
-                                                                    <path
-                                                                        d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" />
-                                                                    <path
-                                                                        d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" />
-                                                                    <path d="M16 5l3 3" />
-                                                                </svg> </button>
-                                                            <div class="dropdown-menu dropdown-menu-end" style="">
-                                                                <a class="dropdown-item" data-bs-toggle="modal"
-                                                                    data-bs-target="#modal-edit" aria-label="Add New">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                        height="24" viewBox="0 0 24 24" fill="none"
-                                                                        stroke="currentColor" stroke-width="2"
-                                                                        stroke-linecap="round" stroke-linejoin="round"
-                                                                        class="icon icon-tabler icons-tabler-outline icon-tabler-eye me-2">
-                                                                        <path stroke="none" d="M0 0h24v24H0z"
-                                                                            fill="none" />
-                                                                        <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
-                                                                        <path
-                                                                            d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" />
-                                                                    </svg> View
-                                                                </a>
-                                                                <a class="dropdown-item" data-bs-toggle="modal"
-                                                                    data-bs-target="#modal-permissions"
-                                                                    aria-label="Add New">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                        height="24" viewBox="0 0 24 24" fill="none"
-                                                                        stroke="currentColor" stroke-width="2"
-                                                                        stroke-linecap="round" stroke-linejoin="round"
-                                                                        class="icon icon-tabler icons-tabler-outline icon-tabler-eye me-2">
-                                                                        <path stroke="none" d="M0 0h24v24H0z"
-                                                                            fill="none" />
-                                                                        <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
-                                                                        <path
-                                                                            d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" />
-                                                                    </svg> Edit Permissions
-                                                                </a>
-                                                                <a class="dropdown-item" href="#">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                        height="24" viewBox="0 0 24 24" fill="none"
-                                                                        stroke="currentColor" stroke-width="2"
-                                                                        stroke-linecap="round" stroke-linejoin="round"
-                                                                        class="icon icon-tabler icons-tabler-outline icon-tabler-circle-x me-2">
-                                                                        <path stroke="none" d="M0 0h24v24H0z"
-                                                                            fill="none" />
-                                                                        <path
-                                                                            d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
-                                                                        <path d="M10 10l4 4m0 -4l-4 4" />
-                                                                    </svg> Delete Role
-                                                                </a>
-                                                            </div>
-                                                        </span>
-                                                    </td> --}}
-                                                </tr>
-                                                <tr>
-                                                    <td><input class="form-check-input m-0 align-middle" type="checkbox"
-                                                            aria-label="Select invoice"></td>
-                                                    <td class="sort-city">Nosmay Ghana</td>
-                                                    <td class="sort-date" data-date="1730273409">27</td>
-                                                    <td class="text-end">
-                                                        <div class="d-flex justify-content-end gap-2">
-                                                            <!-- View Action -->
-                                                            <a href="" class="text-primary me-1" title="View"
-                                                                data-bs-toggle="modal" data-bs-target="#modal-edit">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                    height="24" viewBox="0 0 24 24" fill="none"
-                                                                    stroke="currentColor" stroke-width="2"
-                                                                    stroke-linecap="round" stroke-linejoin="round"
-                                                                    class="icon icon-tabler icons-tabler-outline icon-tabler-eye">
-                                                                    <path stroke="none" d="M0 0h24v24H0z"
-                                                                        fill="none" />
-                                                                    <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
-                                                                    <path
-                                                                        d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" />
-                                                                </svg>
-                                                            </a>
-                                                            <!-- Delete Action -->
-                                                            <a href="#" class="text-danger me-1"
-                                                                data-bs-toggle="modal" data-bs-target="#modal-danger"
-                                                                title="Delete">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                    height="24" viewBox="0 0 24 24" fill="none"
-                                                                    stroke="currentColor" stroke-width="2"
-                                                                    stroke-linecap="round" stroke-linejoin="round"
-                                                                    class="icon icon-tabler icons-tabler-outline icon-tabler-trash">
-                                                                    <path stroke="none" d="M0 0h24v24H0z"
-                                                                        fill="none" />
-                                                                    <path d="M4 7l16 0" />
-                                                                    <path d="M10 11l0 6" />
-                                                                    <path d="M14 11l0 6" />
-                                                                    <path
-                                                                        d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
-                                                                    <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
-                                                                </svg>
-                                                            </a>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><input class="form-check-input m-0 align-middle" type="checkbox"
-                                                            aria-label="Select invoice"></td>
-                                                    <td class="sort-city">Nosmay Zambia</td>
-                                                    <td class="sort-date" data-date="1730273409">17</td>
-                                                    <td class="text-end">
-                                                        <div class="d-flex justify-content-end gap-2">
-                                                            <!-- View Action -->
-                                                            <a href="" class="text-primary me-1" title="View"
-                                                                data-bs-toggle="modal" data-bs-target="#modal-edit">
+                                                            <a href="" class="text-primary me-1"
+                                                                title="View / Edit" data-bs-toggle="modal"
+                                                                data-bs-target="#modal-edit">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                                     height="24" viewBox="0 0 24 24" fill="none"
                                                                     stroke="currentColor" stroke-width="2"
@@ -395,7 +251,7 @@
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Add New Partner</h5>
+                        <h5 class="modal-title">Add New Location</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
 
@@ -405,22 +261,205 @@
                                 <div class="row col-10">
                                     <div class="col">
                                         <div class="mb-3 row">
-                                            <label class="col-3 col-form-label">Partner Name</label>
+                                            <label class="col-3 col-form-label">Location Name</label>
                                             <div class="col">
                                                 <input type="email" class="form-control" aria-describedby="emailHelp"
                                                     placeholder="Enter First Name">
                                             </div>
                                         </div>
                                         <div class="mb-3">
-                                            <label class="form-check form-switch form-switch-3">
-                                              <input class="form-check-input" type="checkbox">
-                                              <span class="form-check-label fw-bold">Add this partner to all tariff plans and bundles</span>
+                                            <label class="col-form-label">Default Partner
                                             </label>
-                                            <label class="form-check form-switch form-switch-2">
-                                              <input class="form-check-input" type="checkbox">
-                                              <span class="form-check-label fw-bold">Add this partner to all scheduling projects</span>
+                                            <div class="col">
+                                                <select class="form-select">
+                                                    <optgroup label="Select One...">
+                                                        <option>Any</option>
+                                                        <option>Nosmay Ghana</option>
+                                                        <option>Nosmay Zambia</option>
+                                                    </optgroup>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="col-form-label">Default tax for any recurring tariff in this
+                                                location
                                             </label>
-                                          </div>
+                                            <div class="col">
+                                                <select class="form-select">
+                                                    <option class="text-primary">Select One...</option>
+                                                    <optgroup label="Taxes">
+                                                        <option>2.5% NHIL</option>
+                                                        <option>15% VAT</option>
+                                                        <option>5% CST</option>
+                                                    </optgroup>
+                                                    <optgroup label="Taxes Groups">
+                                                        <option>27.5% (Levies/CST/VAT)</option>
+                                                        <option>21.9% (Levies/VAT)</option>
+                                                    </optgroup>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="col-form-label">Default tax for any one-time tariff in this
+                                                location
+                                            </label>
+                                            <div class="col">
+                                                <select class="form-select">
+                                                    <option class="text-primary">Select One...</option>
+                                                    <optgroup label="Taxes">
+                                                        <option>2.5% NHIL</option>
+                                                        <option>15% VAT</option>
+                                                        <option>5% CST</option>
+                                                    </optgroup>
+                                                    <optgroup label="Taxes Groups">
+                                                        <option>27.5% (Levies/CST/VAT)</option>
+                                                        <option>21.9% (Levies/VAT)</option>
+                                                    </optgroup>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="col-form-label">Default tax for any inventory item in this location
+
+                                            </label>
+                                            <div class="col">
+                                              <select class="form-select">
+                                                <option class="text-primary">Select One...</option>
+                                                <optgroup label="Taxes">
+                                                    <option>2.5% NHIL</option>
+                                                  <option>15% VAT</option>
+                                                  <option>5% CST</option>
+                                                </optgroup>
+                                                <optgroup label="Taxes Groups">
+                                                  <option>27.5% (Levies/CST/VAT)</option>
+                                                  <option>21.9% (Levies/VAT)</option>
+                                                </optgroup>
+                                              </select>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <a href="#" class="btn btn-link link-secondary btn-3" data-bs-dismiss="modal">
+                                Cancel
+                            </a>
+                            <a href="#" class="btn btn-primary btn-5 ms-auto" type="submit"
+                                data-bs-dismiss="modal">
+                                <!-- Download SVG icon from http://tabler.io/icons/icon/plus -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" class="icon icon-2">
+                                    <path d="M12 5l0 14"></path>
+                                    <path d="M5 12l14 0"></path>
+                                </svg>
+                                Add
+                            </a>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Edit Modal -->
+        <div class="modal modal-blur fade" id="modal-edit" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add New Location</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <form>
+                        <div class="modal-body">
+                            <div class="row justify-content-center my-5">
+                                <div class="row col-10">
+                                    <div class="col">
+                                        <div class="mb-3 row">
+                                            <label class="col-3 col-form-label">Location Name</label>
+                                            <div class="col">
+                                                <input type="email" class="form-control" aria-describedby="emailHelp"
+                                                    placeholder="Enter First Name">
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="col-form-label">Default Partner
+                                            </label>
+                                            <div class="col">
+                                                <select class="form-select">
+                                                    <optgroup label="Select One...">
+                                                        <option>Any</option>
+                                                        <option>Nosmay Ghana</option>
+                                                        <option>Nosmay Zambia</option>
+                                                    </optgroup>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="col-form-label">Default tax for any recurring tariff in this
+                                                location
+                                            </label>
+                                            <div class="col">
+                                                <select class="form-select">
+                                                    <option class="text-primary">Select One...</option>
+                                                    <optgroup label="Taxes">
+                                                        <option>2.5% NHIL</option>
+                                                        <option>15% VAT</option>
+                                                        <option>5% CST</option>
+                                                    </optgroup>
+                                                    <optgroup label="Taxes Groups">
+                                                        <option>27.5% (Levies/CST/VAT)</option>
+                                                        <option>21.9% (Levies/VAT)</option>
+                                                    </optgroup>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="col-form-label">Default tax for any one-time tariff in this
+                                                location
+                                            </label>
+                                            <div class="col">
+                                                <select class="form-select">
+                                                    <option class="text-primary">Select One...</option>
+                                                    <optgroup label="Taxes">
+                                                        <option>2.5% NHIL</option>
+                                                        <option>15% VAT</option>
+                                                        <option>5% CST</option>
+                                                    </optgroup>
+                                                    <optgroup label="Taxes Groups">
+                                                        <option>27.5% (Levies/CST/VAT)</option>
+                                                        <option>21.9% (Levies/VAT)</option>
+                                                    </optgroup>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="col-form-label">Default tax for any inventory item in this location
+
+                                            </label>
+                                            <div class="col">
+                                              <select class="form-select">
+                                                <option class="text-primary">Select One...</option>
+                                                <optgroup label="Taxes">
+                                                    <option>2.5% NHIL</option>
+                                                  <option>15% VAT</option>
+                                                  <option>5% CST</option>
+                                                </optgroup>
+                                                <optgroup label="Taxes Groups">
+                                                  <option>27.5% (Levies/CST/VAT)</option>
+                                                  <option>21.9% (Levies/VAT)</option>
+                                                </optgroup>
+                                              </select>
+                                            </div>
+                                        </div>
 
                                     </div>
                                 </div>
@@ -450,8 +489,7 @@
         </div>
 
         <!-- Delete / Disable Modal -->
-        <div class="modal modal-blur fade" id="modal-danger" tabindex="-1" aria-hidden="true"
-            style="display: none;">
+        <div class="modal modal-blur fade" id="modal-danger" tabindex="-1" aria-hidden="true" style="display: none;">
             <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -468,7 +506,7 @@
                             <path d="M12 16h.01"></path>
                         </svg>
                         <h3>Are you sure?</h3>
-                        <div class="text-secondary">Do you really want to Deactivate this SKU Discount?
+                        <div class="text-secondary">Do you really want to Delete this Location?
                         </div>
                     </div>
                     <div class="modal-footer">
