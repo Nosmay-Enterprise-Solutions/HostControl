@@ -2,25 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\FinanceController;
-use App\Http\Controllers\LeadController;
-use App\Http\Controllers\PaymasterController;
-use App\Http\Controllers\PreferenceController;
-use App\Http\Controllers\ServiceController;
-use App\Http\Controllers\SubscriptionsController;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
 Route::get('/', function () {
     return view('admin.home');
@@ -75,3 +57,4 @@ Route::get('/preferences/system-users', [PreferenceController::class, 'users'])-
 Route::post('/preferences/system-users/create', [AuthController::class, 'create_user'])->name('admin-pr-new-user')->middleware('auth');
 
 Route::get('/preferences/profile', [PreferenceController::class, 'profile'])->name('admin-profile')->middleware('auth');
+

@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\ForgotPassword;
-use App\Mail\VerifyAccount;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
+use Illuminate\Http\RedirectResponse;
 
 class AuthController extends Controller
 {
