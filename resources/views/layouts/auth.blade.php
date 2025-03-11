@@ -17,6 +17,7 @@
     <link href="{{ asset('bank/css/tabler-payments.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('bank/css/tabler-vendors.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('bank/css/demo.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('bank/css/style.css') }}" rel="stylesheet" />
     <style>
         @import url('https://rsms.me/inter/inter.css');
 
