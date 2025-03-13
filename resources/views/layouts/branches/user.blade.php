@@ -4,7 +4,9 @@
         <span class="avatar avatar-sm"
             style="background-image: url({{asset('bank/avatar/default.jpg')}})"></span>
         <div class="d-none d-xl-block ps-2">
-            <div>{{ Auth::user()->fname }}</div>
+            <div>
+                {{ auth()->user()->fname }}
+            </div>
             <div class="mt-1 small text-muted">Administrator</div>
         </div>
     </a>

@@ -2,13 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
 
-Route::get('/', function () {
-    return view('admin.home');
-})->name('home');
-Route::get('/sign-in', [AuthController::class, 'signIn'])->name('auth-signin')->middleware('guest');
-Route::post('/sign-in', [AuthController::class, 'authenticate'])->name('auth-signin')->middleware('guest');
+Route::get('/', function () { return view('admin.home'); })->name('home');
+Route::get('/authenticate', [AuthController::class, 'signIn'])->name('login')->middleware('guest');
+Route::post('/authenticate', [AuthController::class, 'authenticate'])->middleware('guest');
 Route::get('/signout', [AuthController::class, 'dismiss'])->name('auth-signout');
 Route::get('/forgot-password', [AuthController::class, 'forgotPassword'])->name('auth-forgot-pass')->middleware('guest');
 Route::post('/forgot-password', [AuthController::class, 'forgotPassVerify'])->name('auth-forgot-pass')->middleware('guest');
@@ -26,7 +25,7 @@ Route::get('/admin/administration/partners', function () { return view('admin.ad
 // Customer Module
 Route::get('/customers/add', [CustomerController::class, 'customer_add'])->name('admin-customer-add')->middleware('auth');
 Route::get('/customers/all-customers', [CustomerController::class, 'customer_list'])->name('admin-customer-list')->middleware('auth');
-Route::get('/customers/view', [CustomerController::class, 'customer_view'])->name('admin-customer-view')->middleware('auth');
+Route::get('/customers/view/{code}', [CustomerController::class, 'customer_view'])->name('admin-customer-view')->middleware('auth');
 
 // Lead Module
 Route::get('/lead/add', [LeadController::class, 'lead_add'])->name('admin-lead-add')->middleware('auth');

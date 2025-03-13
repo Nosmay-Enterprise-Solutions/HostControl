@@ -18,7 +18,7 @@
                         <p class="fs-h3 text-muted">
                             We've sent you a magic link to <strong>{{$email}}</strong>.<br />
                             Please click the link to confirm your address.<br />
-                            Email received! Please <a href="{{route('auth-signin')}}">sign in</a>.
+                            Email received! Please <a href="{{route('login')}}">sign in</a>.
                         </p>
                     </div>
                     <div class="text-center text-muted mt-3">

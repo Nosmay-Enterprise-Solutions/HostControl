@@ -23,12 +23,21 @@
                 <div class="col-auto ms-auto d-print-none">
                     <div class="btn-list">
                         <span class="d-none d-sm-inline">
-                            <a href="#" class="btn">
-                                New view
+                            <a href="#" class="btn @if(count($customers) == 0) disabled @endif">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="icon icon-tabler icons-tabler-outline icon-tabler-file-arrow-right">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+                                    <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
+                                    <path d="M9 15h6" />
+                                    <path d="M12.5 17.5l2.5 -2.5l-2.5 -2.5" />
+                                </svg>
+                                Export
                             </a>
                         </span>
-                        <a href="#" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal"
-                            data-bs-target="#modal-report">
+                        <a href="{{ route('admin-customer-add') }}" class="btn btn-primary d-none d-sm-inline-block">
                             <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                                 viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -37,7 +46,7 @@
                                 <path d="M12 5l0 14" />
                                 <path d="M5 12l14 0" />
                             </svg>
-                            Create new report
+                            Add New Customer
                         </a>
                         <a href="#" class="btn btn-primary d-sm-none btn-icon" data-bs-toggle="modal"
                             data-bs-target="#modal-report" aria-label="Create new report">
@@ -72,7 +81,7 @@
                                     <path
                                         d="M17 20h-11a3 3 0 0 1 0 -6h11a3 3 0 0 0 0 6h1a3 3 0 0 0 3 -3v-11a2 2 0 0 0 -2 -2h-10a2 2 0 0 0 -2 2v8">
                                     </path>
-                                </svg> | Applications
+                                </svg> | @yield('title')
                             </h3>
                         </div>
                         <div class="card-body border-bottom py-3">
@@ -104,24 +113,40 @@
                                         <th>Customer Name</th>
                                         <th>Phone Number</th>
                                         <th>Email</th>
+                                        <th>Location</th>
+                                        <th>Region/State</th>
                                         <th>Status</th>
-                                        <th>Actions</th>
+                                        <th class="text-end">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @forelse ($customers as $customer)
                                     <tr>
-                                        <td><input class="form-check-input m-0 align-middle" type="checkbox"
-                                                aria-label="Select invoice"></td>
+                                        <td>
+                                            <input class="form-check-input m-0 align-middle" type="checkbox" aria-label="Select invoice">
+                                        </td>
                                         <td><span class="text-muted">01</span></td>
-                                        <td><a href="{{route('admin-customer-view')}}" class="text-reset">Carlson Limited</a></td>
-                                        <td>233559000010</td>
-                                        <td>mail@mail.com</td>
-                                        <td><span class="badge badge-outline text-green">Active</span></td>
-
+                                        <td>
+                                            @if (is_null($customer->companyname))
+                                            {{ $customer->firstname }} {{ $customer->surname }}
+                                            @else
+                                            {{ $customer->companyname }}
+                                            @endif
+                                        </td>
+                                        <td>{{$customer->contact}}</td>
+                                        <td>{{$customer->email}}</td>
+                                        <td>{{$customer->location}}</td>
+                                        <td>{{$customer->state}}</td>
+                                        <td>
+                                            @php
+                                                $state = $status->where('code', $customer->status)->first();
+                                            @endphp
+                                            <span class="badge badge-outline text-{{$state['color']}}">{{$state['name']}}</span>
+                                        </td>
                                         <td class="text-end">
-                                            <div class="d-flex justify-content-ecenter gap-2">
+                                            <div class="justify-content-end gap-2">
                                                 <!-- View Action -->
-                                                <a href="{{ route('admin-customer-view') }}" class="text-primary me-1"
+                                                <a href="{{ route('admin-customer-view', $customer->code) }}" class="text-primary me-1"
                                                     title="View">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -152,12 +177,17 @@
                                             </div>
                                         </td>
                                     </tr>
+                                    @empty
+                                    <tr>
+                                        <td colspan="7" class="text-center">No Customers Found</td>
+                                    </tr>
+                                    @endforelse
                                 </tbody>
                             </table>
                         </div>
 
                         <div class="card-footer d-flex align-items-center">
-                            <p class="m-0 text-muted">Showing <span>1</span> to <span>8</span> of <span>16</span>
+                            {{-- <p class="m-0 text-muted">Showing <span>1</span> to <span>8</span> of <span>16</span>
                                 entries
                             </p>
                             <ul class="pagination m-0 ms-auto">
@@ -189,7 +219,7 @@
                                         </svg>
                                     </a>
                                 </li>
-                            </ul>
+                            </ul> --}}
                         </div>
                     </div>
                 </div>

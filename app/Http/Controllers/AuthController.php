@@ -30,12 +30,11 @@ class AuthController extends Controller
         $task = $io->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
-            'status' => ['required']
+            // 'status' => ['required']
         ]);
 
         if (Auth::attempt($task)) {
             $io->session()->regenerate();
-
             return redirect()->route('admin-dashboard');
         }
 

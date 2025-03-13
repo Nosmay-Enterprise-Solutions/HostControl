@@ -5,7 +5,8 @@
 @section('content')
 
     @php
-        header('Refresh: 7; url=sign-in');
+        $wait = rand(1, 7);
+        header('Refresh: '.$wait.'; url=authenticate');
     @endphp
 
     <body class=" d-flex flex-column">
