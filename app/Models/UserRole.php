@@ -4,13 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Partner extends Model
+class UserRole extends Model
 {
     protected $fillable = [
+        'code',
+        'key',
         'name',
         'description',
-        'logo',
-        'website',
-        'status',
+        'partner_id',
     ];
 }

@@ -31,6 +31,8 @@
 
 <body>
     <script src="{{ asset('bank/js/demo-theme.min.js') }}"></script>
+    {{-- Add JQuery CDN --}}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <div class="page">
         <!-- Sidebar -->
         <aside class="navbar navbar-vertical navbar-expand-lg navbar-dark">

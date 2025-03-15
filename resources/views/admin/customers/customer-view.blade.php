@@ -190,14 +190,33 @@
                                             <div class="card-body  mx-4 justify-content-end">
 
                                                 <h3 class="card-title">Basic Information</h3>
+                                                @if ($customer->type == 'individual')
                                                 <div class="mb-3 row">
-                                                    <label class="col-3 col-form-label required">Full Name</label>
+                                                    <label class="col-3 col-form-label required">Surname</label>
                                                     <div class="col">
-                                                        <input type="email" class="form-control"
-                                                            aria-describedby="emailHelp"
-                                                            placeholder="Enter Customer Full Names">
+                                                        <input type="text" class="form-control"
+                                                            value="{{$customer->surname}}"
+                                                            placeholder="Enter Customer's Surames">
                                                     </div>
                                                 </div>
+                                                <div class="mb-3 row">
+                                                    <label class="col-3 col-form-label required">Other Names</label>
+                                                    <div class="col">
+                                                        <input type="text" class="form-control"
+                                                            value="{{$customer->firstname}}"
+                                                            placeholder="Enter Customer's Other Names">
+                                                    </div>
+                                                </div>
+                                                @elseif($customer->type == 'corporate')
+                                                <div class="mb-3 row">
+                                                    <label class="col-3 col-form-label required">Company Name</label>
+                                                    <div class="col">
+                                                        <input type="text" class="form-control"
+                                                            value="{{$customer->companyname}}"
+                                                            placeholder="Enter Company's Name">
+                                                    </div>
+                                                </div>
+                                                @endif
                                                 <div class="mb-3 row">
                                                     <label class="col-3 col-form-label">Pipeline Status</label>
                                                     <div class="col">
@@ -211,30 +230,17 @@
                                                     </div>
                                                 </div>
                                                 <div class="mb-3 row">
-                                                    <label class="col-3 col-form-label">Owner</label>
-                                                    <div class="col">
-                                                        <select class="form-select">
-                                                            <option>Me</option>
-                                                            <option>Unassigned</option>
-                                                            <option>Michael Agadzi</option>
-                                                            <option>Brian Bayireba</option>
-                                                            <option>Emelia Yamson</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="mb-3 row">
                                                     <label class="col-3 col-form-label required">Phone
                                                         Number</label>
                                                     <div class="col">
-                                                        <input type="email" class="form-control"
-                                                            aria-describedby="emailHelp" placeholder="Eg: 23355*****10">
+                                                        <input type="text" class="form-control"
+                                                            value="{{$customer->contact}}" placeholder="Eg: 23355*****10">
                                                     </div>
                                                 </div>
                                                 <div class="mb-3 row">
                                                     <label class="col-3 col-form-label">POC Number</label>
                                                     <div class="col">
-                                                        <input type="email" class="form-control"
-                                                            aria-describedby="emailHelp"
+                                                        <input type="text" class="form-control"
                                                             placeholder="Enter Point of Contact Number">
                                                     </div>
                                                 </div>
@@ -242,7 +248,7 @@
                                                     <label class="col-3 col-form-label required">Email</label>
                                                     <div class="col">
                                                         <input type="email" class="form-control"
-                                                            aria-describedby="emailHelp" placeholder="Enter email">
+                                                        value="{{$customer->email}}" placeholder="Enter email">
                                                     </div>
                                                 </div>
                                                 <div class="mb-3 row">
@@ -250,7 +256,7 @@
                                                         Email</label>
                                                     <div class="col">
                                                         <input type="email" class="form-control"
-                                                            aria-describedby="emailHelp"
+                                                            value="{{$customer->billing_email}}"
                                                             placeholder="Enter billing email">
                                                     </div>
                                                 </div>
@@ -258,9 +264,10 @@
                                                     <label class="col-3 col-form-label">Partner</label>
                                                     <div class="col">
                                                         <select class="form-select">
-                                                            <option>Nosmay Ghana</option>
-                                                            <option>Nosmay Zambia</option>
-                                                            <option>DEMO</option>
+                                                            <option value="null" selected>Any</option>
+                                                            @foreach ($partners as $partner)
+                                                            <option value="{{$partner->id}}" @if($customer->partner_id == $partner->id) selected @endif>{{$partner->name}}</option>
+                                                            @endforeach
                                                         </select>
                                                     </div>
                                                 </div>
@@ -283,7 +290,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="mb-3 row">
-                                                    <label class="col-3 col-form-label">Street</label>
+                                                    <label class="col-3 col-form-label">Address</label>
                                                     <div class="col">
                                                         <input type="email" class="form-control"
                                                             aria-describedby="emailHelp" placeholder="Enter street">

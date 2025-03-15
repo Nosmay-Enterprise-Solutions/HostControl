@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Mail\VerifyAccount;
+use App\Mail\ForgotPassword;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\RedirectResponse;
 
 class AuthController extends Controller
@@ -55,7 +58,7 @@ class AuthController extends Controller
         $io->session()->invalidate();
         $io->session()->regenerateToken();
 
-        return redirect()->route('auth-signin');
+        return redirect()->route('login');
     }
 
     public function create_user(Request $io): RedirectResponse

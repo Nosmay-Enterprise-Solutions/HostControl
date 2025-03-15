@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdministrationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CustomerController;
@@ -17,15 +18,24 @@ Route::get('/verify-request', [AuthController::class, 'verifyRequest'])->name('a
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin-dashboard')->middleware('auth');
 
 // Administrators Module
-Route::get('/admin/administration', function () { return view('admin.administration.administration'); }) ->name('admin.administration');
-Route::get('/admin/administration/administrators', function () { return view('admin.administration.administrators'); }) ->name('admin.administration.administrators');
-Route::get('/admin/administration/roles', function () { return view('admin.administration.roles'); }) ->name('admin.administration.roles');
-Route::get('/admin/administration/partners', function () { return view('admin.administration.partners'); }) ->name('admin.administration.partners');
+Route::get('/admin/administration', function () { return view('admin.administration.administration'); })->name('admin.administration');
+Route::get('/admin/administration/administrators', function () { return view('admin.administration.administrators'); })->name('admin.administration.administrators');
+
+Route::get('/admin/administration/roles', [AdministrationController::class, 'roles'])->name('admin.administration.roles');
+
+Route::get('/admin/administration/partners', [AdministrationController::class, 'partners'])->name('admin.administration.partners');
+Route::post('/admin/administration/partners', [AdministrationController::class, 'add_partner']);
+Route::post('/admin/administration/partners/edit', [AdministrationController::class, 'modify_partner'])->name('admin.administration.modify-partners');
+
+Route::get('/admin/administration/locations', [AdministrationController::class, 'locations'])->name('admin.administration.locations');
+Route::post('/admin/administration/locations', [AdministrationController::class, 'add_location']);
 
 // Customer Module
 Route::get('/customers/add', [CustomerController::class, 'customer_add'])->name('admin-customer-add')->middleware('auth');
+Route::post('/customers/add', [CustomerController::class, 'process_customer_add'])->middleware('auth');
 Route::get('/customers/all-customers', [CustomerController::class, 'customer_list'])->name('admin-customer-list')->middleware('auth');
-Route::get('/customers/view/{code}', [CustomerController::class, 'customer_view'])->name('admin-customer-view')->middleware('auth');
+Route::get('/customers/{code}/view', [CustomerController::class, 'customer_view'])->name('admin-customer-view')->middleware('auth');
+Route::get('/customers/get-location/{id}', [CustomerController::class, 'get_location'])->middleware('auth');
 
 // Lead Module
 Route::get('/lead/add', [LeadController::class, 'lead_add'])->name('admin-lead-add')->middleware('auth');

@@ -22,7 +22,7 @@ class Customer extends Model
         'city',
         'state',
         'country',
-        'location',
+        'location_id',
         'status'
     ];
 }

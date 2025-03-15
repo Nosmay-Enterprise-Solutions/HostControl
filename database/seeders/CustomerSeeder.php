@@ -27,7 +27,7 @@ class CustomerSeeder extends Seeder
             'city' => 'Lagos',
             'state' => 'Lagos',
             'country' => 'Nigeria',
-            'location' => 'Lagos',
+            'location_id' => null,
             'status' => 1,
             'created_by' => 1,
         ]);

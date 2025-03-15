@@ -2,7 +2,7 @@
 
 @section('domain', 'Administration')
 
-@section('title', 'Partners')
+@section('title', 'Locations')
 
 @section('content')
 
@@ -129,30 +129,37 @@
                                             style=" overflow-y: auto; max-height: 60vh;">
                                             <thead>
                                                 <tr>
-                                                    <th class="w-1">
-                                                        <input class="form-check-input m-0 align-middle" type="checkbox" aria-label="Select all invoices">
+                                                    <th class="w-1"><input class="form-check-input m-0 align-middle"
+                                                            type="checkbox" aria-label="Select all invoices"></th>
+                                                    <th><button class="table-sort" data-sort="sort-city">Location
+                                                            Name</button>
                                                     </th>
-                                                    <th>
-                                                        <button class="table-sort" data-sort="sort-city">Partner Name</button>
+                                                    <th><button class="table-sort" data-sort="sort-city">Partner</button>
                                                     </th>
-                                                    <th>
-                                                        <button class="table-sort" data-sort="sort-date">Customers</button>
+                                                    <th><button class="table-sort"
+                                                            data-sort="sort-date">Customers</button>
+                                                    </th>
+                                                    <th><button class="table-sort" data-sort="sort-date">Taxes</button>
                                                     </th>
                                                     <th class="text-end">Action</th>
                                                 </tr>
                                             </thead>
-                                            <tbody class="w-100">
-                                                @forelse ($partners as $partner)
+                                            <tbody class="w-1004">
+                                                @forelse ($locations as $location)
                                                 <tr>
-                                                    <td><input class="form-check-input m-0 align-middle" type="checkbox"
-                                                            aria-label="Select invoice"></td>
-                                                    <td class="sort-city">{{$partner['name']}}</td>
-                                                    <td class="sort-date" data-date="1730273409">0</td>
+                                                    <td>
+                                                        <input class="form-check-input m-0 align-middle" type="checkbox">
+                                                    </td>
+                                                    <td class="sort-city">{{$location['name']}}</td>
+                                                    <td class="sort-date" data-date="1730273409">{{$location['partner']}}</td>
+                                                    <td class="sort-date" data-date="1730273409">{{$location['cust_count']}}</td>
+                                                    <td class="sort-date" data-date="1730273409">27.7%</td>
                                                     <td class="text-end">
                                                         <div class="d-flex justify-content-end gap-2">
                                                             <!-- View Action -->
-                                                            <a href="" class="text-primary me-1" title="View"
-                                                                data-bs-toggle="modal" data-bs-target="#modal-edit">
+                                                            <a href="" class="text-primary me-1"
+                                                                title="View / Edit" data-bs-toggle="modal"
+                                                                data-bs-target="#modal-edit">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                                     height="24" viewBox="0 0 24 24" fill="none"
                                                                     stroke="currentColor" stroke-width="2"
@@ -189,9 +196,10 @@
                                                 </tr>
                                                 @empty
                                                 <tr>
-                                                    <td colspan="4" class="text-center">No Partners Found</td>
+                                                    <td class="text-center" colspan="6">No Location Found!</td>
                                                 </tr>
                                                 @endforelse
+
                                             </tbody>
                                         </table>
                                     </div>
@@ -233,10 +241,16 @@
                                     </div>
                                 </div>
                             </div>
+
+
                         </div>
+
                     </div>
+
                 </div>
+
             </div>
+
         </div>
 
         <!-- Add Modal -->
@@ -244,7 +258,7 @@
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Add New Partner</h5>
+                        <h5 class="modal-title">Add New Location</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
 
@@ -253,26 +267,82 @@
                             <div class="row justify-content-center my-5">
                                 <div class="row col-10">
                                     <div class="col">
-                                        <div class="mb-3 row">
-                                            <label class="col-3 col-form-label">Partner Name</label>
+                                        <div class="mb-4 row">
+                                            <label class="col-3 col-form-label" for="location-name">Location Name</label>
                                             <div class="col">
-                                                <input type="text" class="form-control" name="partner_name"
-                                                    placeholder="Enter Partner's Name">
+                                                <input type="text" class="form-control" placeholder="Enter First Name" name="location_name" id="location-name">
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
-                                            <div class="col-3"></div>
+                                            <label class="col-3 col-form-label">Default Partner</label>
                                             <div class="col">
-                                                <label class="form-check form-switch form-switch-3">
-                                                    <input class="form-check-input" type="checkbox">
-                                                    <span class="form-check-label fw-bold">Add this partner to all tariff plans
-                                                        and bundles</span>
-                                                </label>
-                                                <label class="form-check form-switch form-switch-2">
-                                                    <input class="form-check-input" type="checkbox">
-                                                    <span class="form-check-label fw-bold">Add this partner to all scheduling
-                                                        projects</span>
-                                                </label>
+                                                <select class="form-select" name="partner" id="partner">
+                                                    <optgroup label="Select One...">
+                                                        <option value="null">Any</option>
+                                                        @foreach ($partners as $partner)
+                                                        <option value="{{$partner->id}}">{{$partner->name}}</option>
+                                                        @endforeach
+                                                    </optgroup>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="col-form-label">Default tax for any recurring tariff in this
+                                                location
+                                            </label>
+                                            <div class="col">
+                                                <select class="form-select">
+                                                    <option class="text-primary">Select One...</option>
+                                                    <optgroup label="Taxes">
+                                                        <option>2.5% NHIL</option>
+                                                        <option>15% VAT</option>
+                                                        <option>5% CST</option>
+                                                    </optgroup>
+                                                    <optgroup label="Taxes Groups">
+                                                        <option>27.5% (Levies/CST/VAT)</option>
+                                                        <option>21.9% (Levies/VAT)</option>
+                                                    </optgroup>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="col-form-label">Default tax for any one-time tariff in this
+                                                location
+                                            </label>
+                                            <div class="col">
+                                                <select class="form-select">
+                                                    <option class="text-primary">Select One...</option>
+                                                    <optgroup label="Taxes">
+                                                        <option>2.5% NHIL</option>
+                                                        <option>15% VAT</option>
+                                                        <option>5% CST</option>
+                                                    </optgroup>
+                                                    <optgroup label="Taxes Groups">
+                                                        <option>27.5% (Levies/CST/VAT)</option>
+                                                        <option>21.9% (Levies/VAT)</option>
+                                                    </optgroup>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="col-form-label">Default tax for any inventory item in this
+                                                location
+
+                                            </label>
+                                            <div class="col">
+                                                <select class="form-select">
+                                                    <option class="text-primary">Select One...</option>
+                                                    <optgroup label="Taxes">
+                                                        <option>2.5% NHIL</option>
+                                                        <option>15% VAT</option>
+                                                        <option>5% CST</option>
+                                                    </optgroup>
+                                                    <optgroup label="Taxes Groups">
+                                                        <option>27.5% (Levies/CST/VAT)</option>
+                                                        <option>21.9% (Levies/VAT)</option>
+                                                    </optgroup>
+                                                </select>
                                             </div>
                                         </div>
 
@@ -285,7 +355,7 @@
                             <a href="#" class="btn btn-link link-secondary btn-3" data-bs-dismiss="modal">
                                 Cancel
                             </a>
-                            <button href="javascript:;" class="btn btn-primary btn-5 ms-auto" type="submit">
+                            <button href="#" class="btn btn-primary btn-5 ms-auto" type="submit">
                                 <!-- Download SVG icon from http://tabler.io/icons/icon/plus -->
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -295,6 +365,129 @@
                                 </svg>
                                 Add
                             </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Edit Modal -->
+        <div class="modal modal-blur fade" id="modal-edit" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add New Location</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <form>
+                        <div class="modal-body">
+                            <div class="row justify-content-center my-5">
+                                <div class="row col-10">
+                                    <div class="col">
+                                        <div class="mb-3 row">
+                                            <label class="col-3 col-form-label">Location Name</label>
+                                            <div class="col">
+                                                <input type="email" class="form-control" aria-describedby="emailHelp"
+                                                    placeholder="Enter First Name">
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="col-form-label">Default Partner
+                                            </label>
+                                            <div class="col">
+                                                <select class="form-select">
+                                                    <optgroup label="Select One...">
+                                                        <option>Any</option>
+                                                        <option>Nosmay Ghana</option>
+                                                        <option>Nosmay Zambia</option>
+                                                    </optgroup>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="col-form-label">Default tax for any recurring tariff in this
+                                                location
+                                            </label>
+                                            <div class="col">
+                                                <select class="form-select">
+                                                    <option class="text-primary">Select One...</option>
+                                                    <optgroup label="Taxes">
+                                                        <option>2.5% NHIL</option>
+                                                        <option>15% VAT</option>
+                                                        <option>5% CST</option>
+                                                    </optgroup>
+                                                    <optgroup label="Taxes Groups">
+                                                        <option>27.5% (Levies/CST/VAT)</option>
+                                                        <option>21.9% (Levies/VAT)</option>
+                                                    </optgroup>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="col-form-label">Default tax for any one-time tariff in this
+                                                location
+                                            </label>
+                                            <div class="col">
+                                                <select class="form-select">
+                                                    <option class="text-primary">Select One...</option>
+                                                    <optgroup label="Taxes">
+                                                        <option>2.5% NHIL</option>
+                                                        <option>15% VAT</option>
+                                                        <option>5% CST</option>
+                                                    </optgroup>
+                                                    <optgroup label="Taxes Groups">
+                                                        <option>27.5% (Levies/CST/VAT)</option>
+                                                        <option>21.9% (Levies/VAT)</option>
+                                                    </optgroup>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="col-form-label">Default tax for any inventory item in this
+                                                location
+
+                                            </label>
+                                            <div class="col">
+                                                <select class="form-select">
+                                                    <option class="text-primary">Select One...</option>
+                                                    <optgroup label="Taxes">
+                                                        <option>2.5% NHIL</option>
+                                                        <option>15% VAT</option>
+                                                        <option>5% CST</option>
+                                                    </optgroup>
+                                                    <optgroup label="Taxes Groups">
+                                                        <option>27.5% (Levies/CST/VAT)</option>
+                                                        <option>21.9% (Levies/VAT)</option>
+                                                    </optgroup>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <a href="#" class="btn btn-link link-secondary btn-3" data-bs-dismiss="modal">
+                                Cancel
+                            </a>
+                            <a href="#" class="btn btn-primary btn-5 ms-auto" type="submit"
+                                data-bs-dismiss="modal">
+                                <!-- Download SVG icon from http://tabler.io/icons/icon/plus -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" class="icon icon-2">
+                                    <path d="M12 5l0 14"></path>
+                                    <path d="M5 12l14 0"></path>
+                                </svg>
+                                Add
+                            </a>
                         </div>
 
                     </form>
@@ -320,7 +513,7 @@
                             <path d="M12 16h.01"></path>
                         </svg>
                         <h3>Are you sure?</h3>
-                        <div class="text-secondary">Do you really want to Deactivate this SKU Discount?
+                        <div class="text-secondary">Do you really want to Delete this Location?
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -333,7 +526,7 @@
                                 </div>
                                 <div class="col">
                                     <a href="#" class="btn btn-danger btn-4 w-100" data-bs-dismiss="modal">
-                                        Deactivate
+                                        Delete
                                     </a>
                                 </div>
                             </div>

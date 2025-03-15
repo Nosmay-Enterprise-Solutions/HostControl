@@ -115,6 +115,7 @@
                                         <th>Email</th>
                                         <th>Location</th>
                                         <th>Region/State</th>
+                                        <th>Type</th>
                                         <th>Status</th>
                                         <th class="text-end">Actions</th>
                                     </tr>
@@ -127,7 +128,7 @@
                                         </td>
                                         <td><span class="text-muted">01</span></td>
                                         <td>
-                                            @if (is_null($customer->companyname))
+                                            @if ($customer->type == 'individual')
                                             {{ $customer->firstname }} {{ $customer->surname }}
                                             @else
                                             {{ $customer->companyname }}
@@ -137,6 +138,7 @@
                                         <td>{{$customer->email}}</td>
                                         <td>{{$customer->location}}</td>
                                         <td>{{$customer->state}}</td>
+                                        <td class="text-capitalize">{{$customer->type}}</td>
                                         <td>
                                             @php
                                                 $state = $status->where('code', $customer->status)->first();
@@ -146,7 +148,7 @@
                                         <td class="text-end">
                                             <div class="justify-content-end gap-2">
                                                 <!-- View Action -->
-                                                <a href="{{ route('admin-customer-view', $customer->code) }}" class="text-primary me-1"
+                                                <a href="{{ route('admin-customer-view', $customer->id) }}" class="text-primary me-1"
                                                     title="View">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"

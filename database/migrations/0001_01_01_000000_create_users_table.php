@@ -15,11 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('type', 15)->nullable();
             $table->string('role', 15)->nullable();
-            $table->string('avatar')->nullable();
-            $table->string('fname');
-            $table->string('lname');
-            $table->date('dob');
-            $table->string('gender', 6);
             $table->string('email')->unique();
             $table->string('contact', 16)->unique();
             $table->timestamp('email_verified_at')->nullable();

@@ -13,14 +13,15 @@ return new class extends Migration
     {
         Schema::disableForeignKeyConstraints();
 
-        Schema::create('partners', function (Blueprint $table) {
+        Schema::create('administrators', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->text('description')->nullable();
-            $table->string('logo')->nullable();
-            $table->string('website')->nullable();
-            $table->integer('status')->default(0);
-            $table->foreignId('created_by')->nullable()->constrained('users');
+            $table->string('code', 12);
+            $table->foreignId('user_id')->references('id')->on('users');
+            $table->string('avatar')->nullable();
+            $table->string('fname');
+            $table->string('lname');
+            $table->date('dob');
+            $table->string('gender', 6);
             $table->timestamps();
         });
 
@@ -32,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('partners');
+        Schema::dropIfExists('administrators');
     }
 };

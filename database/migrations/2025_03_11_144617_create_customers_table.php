@@ -32,7 +32,7 @@ return new class extends Migration
             $table->string('city')->nullable();
             $table->string('state')->nullable();
             $table->string('country')->nullable();
-            $table->string('location')->nullable();
+            $table->foreignId('location_id')->nullable()->constrained('locations');
             $table->integer('status')->default(0);
             $table->foreignId('created_by')->nullable()->constrained('users');
             $table->foreignId('partner_id')->nullable()->constrained('partners');

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Library\System;
+use App\Models\Partner;
 use App\Models\Customer;
+use App\Models\Location;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -11,11 +13,15 @@ class CustomerController extends Controller
     // Applications
     public function customer_add()
     {
-        return view('admin.customers.customer-add');
+        $partners = Partner::where('status', 1)->get();
+        return view('admin.customers.customer-add')->with([
+            'partners' => $partners,
+        ]);
     }
 
     public function process_customer_add(Request $io)
     {
+        dd($io);
         $record = Customer::orderBy('id', 'desc')
             ->first()->code;
         if ( is_null($record) ){
@@ -43,10 +49,26 @@ class CustomerController extends Controller
 
     public function customer_view(Request $io, $code)
     {
-        $data = Customer::where('code', $code)->first();
+        $data = Customer::where('id', $code)->first();
+
+        if(is_null($data)){
+            return back();
+        }
+
         return view('admin.customers.customer-view')->with([
             'customer' => $data,
+            'partners' => Partner::where('status', 1)->get(),
             'status' => System::mainStatus()
         ]);
+    }
+
+    public function get_location($id)
+    {
+        if($id == 'null'){
+            $data = Location::select('id', 'name')->where('status', 1)->get();
+        }else{
+            $data = Location::select('id', 'name')->where('partner_id', $id)->get();
+        }
+        return $data;
     }
 }

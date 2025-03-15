@@ -148,7 +148,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="custom-link col-sm-6 col-md-2 ">
-                                                    <a href="" title="Locations">
+                                                    <a href="{{route('admin.administration.locations')}}" title="Locations">
                                                         <span class="button-title"><svg xmlns="http://www.w3.org/2000/svg"
                                                                 width="24" height="24" viewBox="0 0 24 24"
                                                                 fill="none" stroke="currentColor" stroke-width="2"
@@ -272,7 +272,7 @@
                                                 </a>
                                             </div>
                                             <div class="custom-link col-sm-6 col-md-2 ">
-                                                <a href="" title="Locations">
+                                                <a href="{{route('admin.administration.locations')}}" title="Locations">
                                                     <span class="button-title">Locations</span>
                                                 </a>
                                             </div>
