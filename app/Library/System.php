@@ -32,4 +32,24 @@ class System
 
         return collect($status);
     }
+
+    static function id_types()
+    {
+        $id = [
+            [
+                'value' => 'business_certificate',
+                'name' => 'Business Certificate'
+            ],
+            [
+                'value' => 'national_id',
+                'name' => 'National ID'
+            ],
+            [
+                'value' => 'passport',
+                'name' => 'Passport'
+            ],
+        ];
+
+        return collect($id);
+    }
 }

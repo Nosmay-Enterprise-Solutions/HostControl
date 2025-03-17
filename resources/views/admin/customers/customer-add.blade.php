@@ -29,7 +29,7 @@
             <div class="row row-card">
 
                 <div class="col-12">
-                    <form class="card" method="post">@csrf
+                    <form class="card" method="post" novalidate>@csrf
                         <div class="card-header">
                             <h3 class="card-title">Customer Basic Info</h3>
                         </div>
@@ -38,13 +38,13 @@
                                 <label class="col-3 col-form-label" for="portal-login">Portal Login</label>
                                 <div class="col">
                                     <input type="email" class="form-control"
-                                        placeholder="Enter portal login email/number" id="portal-login" name="portal_login">
+                                        placeholder="Enter portal login email/number" id="portal-login" name="portal_login" required>
                                 </div>
                             </div>
                             <div class="mb-3 row">
                                 <label class="col-3 col-form-label" for="portal-password">Portal Password</label>
                                 <div class="col">
-                                    <input type="password" class="form-control" placeholder="Password" id="portal-password" name="portal_password">
+                                    <input type="password" class="form-control" placeholder="Password" id="portal-password" name="portal_password" required>
                                     <small class="form-hint">
                                         Your password must be 8-20 characters long, contain letters and numbers, and
                                         must not contain
@@ -55,13 +55,13 @@
                             <div class="mb-3 row">
                                 <label class="col-3 col-form-label" for="confirm-password">Confirm Password</label>
                                 <div class="col">
-                                    <input type="password" class="form-control" placeholder="Confirm password" id="confirm-password" name="confirm_password">
+                                    <input type="password" class="form-control" placeholder="Confirm password" id="confirm-password" required>
                                 </div>
                             </div>
                             <div class="mb-3 row">
                                 <label class="col-3 col-form-label" for="category">Category</label>
                                 <div class="col">
-                                    <select class="form-select" name="category" id="category">
+                                    <select class="form-select" name="category" id="category" required>
                                         <option selected disabled>Select Category</option>
                                         <option value="individual">Individual</option>
                                         <option value="corporate">Corporate</option>
@@ -71,56 +71,54 @@
                             <div class="mb-3 row">
                                 <label class="col-3 col-form-label" for="company-name">Companey Name</label>
                                 <div class="col">
-                                    <input type="email" class="form-control"
-                                        placeholder="Enter companey names" name="company_name" id="company-name">
+                                    <input type="text" class="form-control"
+                                        placeholder="Enter companey names" name="company_name" id="company-name" required>
                                 </div>
                             </div>
                             <div class="mb-3 row" style="display: none;">
                                 <label class="col-3 col-form-label" for="surname">Surname</label>
                                 <div class="col">
-                                    <input type="email" class="form-control"
-                                        placeholder="Enter Surname" name="surname" id="surname">
+                                    <input type="text" class="form-control"
+                                        placeholder="Enter Surname" name="surname" id="surname" required>
                                 </div>
                             </div>
                             <div class="mb-3 row" style="display: none;">
                                 <label class="col-3 col-form-label" for="other-names">Other Names</label>
                                 <div class="col">
-                                    <input type="email" class="form-control"
-                                        placeholder="Enter Other Names" name="other_names" id="other-names">
+                                    <input type="text" class="form-control"
+                                        placeholder="Enter Other Names" name="other_names" id="other-names" required>
                                 </div>
                             </div>
                             <div class="mb-3 row">
                                 <label class="col-3 col-form-label" for="email">Email</label>
                                 <div class="col">
                                     <input type="email" class="form-control"
-                                        placeholder="Enter email" name="email" id="email">
+                                        placeholder="Enter email" name="email" id="email" required>
                                 </div>
                             </div>
                             <div class="mb-3 row">
                                 <label class="col-3 col-form-label" for="billing-email">Billing Email</label>
                                 <div class="col">
                                     <input type="email" class="form-control"
-                                        placeholder="Enter billing email" name="billing_email" id="billing-email">
+                                        placeholder="Enter billing email" name="billing_email" id="billing-email" required>
                                 </div>
                             </div>
                             <div class="mb-3 row">
                                 <label class="col-3 col-form-label" for="phone-number">Phone Number</label>
                                 <div class="col">
-                                    {{-- <input type="email" class="form-control"
-                                        placeholder="Enter phone number" name="phone_number" id="phone-number"> --}}
-                                        <input type="text" name="input-mask" class="form-control" data-mask="+000(0)000000000" data-mask-visible="true" placeholder="+000(0)000000000" autocomplete="off">
+                                    <input type="text" name="phonenumber" class="form-control" data-mask="+000(0)000000000" data-mask-visible="true" placeholder="+000(0)000000000" autocomplete="off" required>
                                 </div>
                             </div>
                             <div class="mb-3 row" style="display: none;">
                                 <label class="col-3 col-form-label" for="date-of-birth">Date of Birth</label>
                                 <div class="col">
-                                    <input type="date" class="form-control" placeholder="DD/MM/YYY" name="date_of_birth" id="date-of-birth">
+                                    <input type="date" class="form-control" placeholder="DD/MM/YYY" name="date_of_birth" id="date-of-birth" required>
                                 </div>
                             </div>
                             <div class="mb-3 row">
                                 <label class="col-3 col-form-label" for="registration-date">Registration Date</label>
                                 <div class="col">
-                                    <input type="date" class="form-control" placeholder="DD/MM/YYY" name="registration_date" id="registration-date">
+                                    <input type="date" class="form-control" placeholder="DD/MM/YYY" name="registration_date" id="registration-date" required>
                                 </div>
                             </div>
                             <div class="mb-3 row">
@@ -128,21 +126,23 @@
                                 <div class="col">
                                     <select class="form-select" name="id_type" id="id-type">
                                         <option disabled selected>Select Type</option>
-                                        <option>Nosmay Zambia</option>
+                                        @foreach ($id_types as $idtype)
+                                        <option>{{$idtype['name']}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="mb-3 row">
                                 <label class="col-3 col-form-label" for="identification-id">Identification ID</label>
                                 <div class="col">
-                                    <input type="email" class="form-control" placeholder="Enter personal Id number"
+                                    <input type="text" class="form-control" placeholder="Enter personal Id number"
                                     name="identification_id" id="identification-id">
                                 </div>
                             </div>
                             <div class="mb-3 row">
                                 <label class="col-3 col-form-label" for="partner">Partner</label>
                                 <div class="col">
-                                    <select class="form-select" name="partner" id="partner">
+                                    <select class="form-select" name="partner" id="partner" required>
                                         <option selected disabled>Select Partner</option>
                                         <option value="null">Any</option>
                                         @foreach ($partners as $partner)
@@ -154,7 +154,7 @@
                             <div class="mb-3 row">
                                 <label class="col-3 col-form-label" for="location">Location</label>
                                 <div class="col">
-                                    <select class="form-select" name="location" id="location">
+                                    <select class="form-select" name="location" id="location" required>
                                         <option selected disabled>Select Location</option>
                                         <option>Accra</option>
                                         <option>Kumasi</option>
@@ -164,15 +164,15 @@
                             <div class="mb-3 row">
                                 <label class="col-3 col-form-label" for="address">Address</label>
                                 <div class="col">
-                                    <input type="email" class="form-control" placeholder="Enter Address"
-                                    name="address" id="address">
+                                    <input type="text" class="form-control" placeholder="Enter Address"
+                                    name="address" id="address" required>
                                 </div>
                             </div>
                             <div class="mb-3 row">
                                 <label class="col-3 col-form-label" for="city">City</label>
                                 <div class="col">
-                                    <input type="email" class="form-control" placeholder="Enter City"
-                                    name="city" id="city">
+                                    <input type="text" class="form-control" placeholder="Enter City"
+                                    name="city" id="city" required>
                                 </div>
                             </div>
                         </div>
@@ -232,18 +232,37 @@
                         $('#location').val(response.location);
                         // Append response to location options
                         $('#location').empty().append('<option selected disabled>Select Location</option>');
-                        if (response.locations && Array.isArray(response.locations)) {
-                            $.each(response.locations, function(index, location) {
-                                if (location.id && location.name) {
+                        if (response && response && Array.isArray(response)) {
+                            $.each(response, function(index, location) {
+                                if (location && location.id && location.name) {
                                     $('#location').append('<option value="' + location.id + '">' + location.name + '</option>');
                                 }
                             });
                         } else {
-                            console.error('Invalid locations data:', response.locations);
+                            console.error('Invalid locations data:', response ? response : 'No response received');
+                            console.log(response)
                         }
                     }
                 });
             });
+        });
+
+        // Validate inputs if fields that are not display none are filled
+        $('form.card').on('submit', function (e) {
+            var isValid = true;
+            $(this).find('input:visible, select:visible').each(function () {
+            if ($(this).prop('required') && !$(this).val()) {
+                isValid = false;
+                $(this).addClass('is-invalid');
+            } else {
+                $(this).removeClass('is-invalid');
+            }
+            });
+
+            if (!isValid) {
+            e.preventDefault();
+            alert('Please fill all required fields.');
+            }
         });
     </script>
 

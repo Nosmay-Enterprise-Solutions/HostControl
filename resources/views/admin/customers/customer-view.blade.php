@@ -212,7 +212,7 @@
                                                     <label class="col-3 col-form-label required">Company Name</label>
                                                     <div class="col">
                                                         <input type="text" class="form-control"
-                                                            value="{{$customer->companyname}}"
+                                                            value="{{$customer->companyname}}" readonly
                                                             placeholder="Enter Company's Name">
                                                     </div>
                                                 </div>

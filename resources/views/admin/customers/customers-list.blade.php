@@ -23,7 +23,7 @@
                 <div class="col-auto ms-auto d-print-none">
                     <div class="btn-list">
                         <span class="d-none d-sm-inline">
-                            <a href="#" class="btn @if(count($customers) == 0) disabled @endif">
+                            <a href="#" class="btn @if (count($customers) == 0) disabled @endif">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                     stroke-linejoin="round"
@@ -122,67 +122,102 @@
                                 </thead>
                                 <tbody>
                                     @forelse ($customers as $customer)
-                                    <tr>
-                                        <td>
-                                            <input class="form-check-input m-0 align-middle" type="checkbox" aria-label="Select invoice">
-                                        </td>
-                                        <td><span class="text-muted">01</span></td>
-                                        <td>
-                                            @if ($customer->type == 'individual')
-                                            {{ $customer->firstname }} {{ $customer->surname }}
-                                            @else
-                                            {{ $customer->companyname }}
-                                            @endif
-                                        </td>
-                                        <td>{{$customer->contact}}</td>
-                                        <td>{{$customer->email}}</td>
-                                        <td>{{$customer->location}}</td>
-                                        <td>{{$customer->state}}</td>
-                                        <td class="text-capitalize">{{$customer->type}}</td>
-                                        <td>
-                                            @php
-                                                $state = $status->where('code', $customer->status)->first();
-                                            @endphp
-                                            <span class="badge badge-outline text-{{$state['color']}}">{{$state['name']}}</span>
-                                        </td>
-                                        <td class="text-end">
-                                            <div class="justify-content-end gap-2">
-                                                <!-- View Action -->
-                                                <a href="{{ route('admin-customer-view', $customer->id) }}" class="text-primary me-1"
-                                                    title="View">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                        class="icon icon-tabler icons-tabler-outline icon-tabler-eye">
-                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                        <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
-                                                        <path
-                                                            d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" />
-                                                    </svg>
-                                                </a>
+                                        <tr>
+                                            <td>
+                                                <input class="form-check-input m-0 align-middle" type="checkbox"
+                                                    aria-label="Select invoice">
+                                            </td>
+                                            <td><span class="text-muted">01</span></td>
+                                            <td>
+                                                @if ($customer->type == 'individual')
+                                                    {{ $customer->firstname }} {{ $customer->surname }}
+                                                @else
+                                                    {{ $customer->companyname }}
+                                                @endif
+                                            </td>
+                                            <td>{{ $customer->contact }}</td>
+                                            <td>{{ $customer->email }}</td>
+                                            <td>{{ $customer->location }}</td>
+                                            <td>{{ $customer->state }}</td>
+                                            <td class="text-capitalize">{{ $customer->type }}</td>
+                                            <td>
+                                                @php
+                                                    $state = $status->where('code', $customer->status)->first();
+                                                @endphp
+                                                <span
+                                                    class="badge badge-outline text-{{ $state['color'] }}">{{ $state['name'] }}</span>
+                                            </td>
+                                            <td class="text-end">
+                                                <div class="justify-content-end gap-2">
+                                                    <!-- View Action -->
+                                                    <a href="{{ route('admin-customer-view', $customer->id) }}"
+                                                        class="text-primary me-1" title="View">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                            height="24" viewBox="0 0 24 24" fill="none"
+                                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                            stroke-linejoin="round"
+                                                            class="icon icon-tabler icons-tabler-outline icon-tabler-eye">
+                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                            <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+                                                            <path
+                                                                d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" />
+                                                        </svg>
+                                                    </a>
 
-                                                <!-- Delete Action -->
-                                                <a href="#" class="text-danger me-1" data-bs-toggle="modal"
-                                                    data-bs-target="#modal-danger" title="Delete">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                        class="icon icon-tabler icons-tabler-outline icon-tabler-trash">
-                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                        <path d="M4 7l16 0" />
-                                                        <path d="M10 11l0 6" />
-                                                        <path d="M14 11l0 6" />
-                                                        <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
-                                                        <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
-                                                    </svg>
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                                    @if ($customer->status != 1)
+                                                    <!-- Enable Action -->
+                                                    <a href="#" class="text-success me-1" title="Enable">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                            height="24" viewBox="0 0 24 24" fill="none"
+                                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                            stroke-linejoin="round"
+                                                            class="icon icon-tabler icons-tabler-outline icon-tabler-check">
+                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                            <path d="M5 12l5 5l10 -10" />
+                                                        </svg>
+                                                    </a>
+                                                    @endif
+
+                                                    @if ($customer->status != 0)
+                                                    <!-- Disable Action -->
+                                                    <a href="#" class="text-danger me-1" data-bs-toggle="modal"
+                                                        data-bs-target="#modal-disable" title="Disable">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                            height="24" viewBox="0 0 24 24" fill="none"
+                                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                            stroke-linejoin="round"
+                                                            class="icon icon-tabler icons-tabler-outline icon-tabler-square-rounded-minus">
+                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                            <path d="M9 12h6" />
+                                                            <path
+                                                                d="M12 3c7.2 0 9 1.8 9 9s-1.8 9 -9 9s-9 -1.8 -9 -9s1.8 -9 9 -9z" />
+                                                        </svg>
+                                                    </a>
+                                                    @endif
+
+                                                    <!-- Delete Action -->
+                                                    <a href="#" class="text-danger me-1" data-bs-toggle="modal"
+                                                        data-bs-target="#modal-danger" title="Delete">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                            height="24" viewBox="0 0 24 24" fill="none"
+                                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                            stroke-linejoin="round"
+                                                            class="icon icon-tabler icons-tabler-outline icon-tabler-trash">
+                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                            <path d="M4 7l16 0" />
+                                                            <path d="M10 11l0 6" />
+                                                            <path d="M14 11l0 6" />
+                                                            <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                                                            <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                                                        </svg>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
                                     @empty
-                                    <tr>
-                                        <td colspan="7" class="text-center">No Customers Found</td>
-                                    </tr>
+                                        <tr>
+                                            <td colspan="7" class="text-center">No Customers Found</td>
+                                        </tr>
                                     @endforelse
                                 </tbody>
                             </table>
@@ -225,8 +260,49 @@
                         </div>
                     </div>
                 </div>
+
             </div>
 
+        </div>
+    </div>
+
+    <!-- Delete / Disable Modal -->
+    <div class="modal modal-blur fade" id="modal-danger" tabindex="-1" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-status bg-danger"></div>
+                <div class="modal-body text-center py-4">
+                    <!-- Download SVG icon from http://tabler.io/icons/icon/alert-triangle -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" class="icon mb-2 text-danger icon-lg">
+                        <path d="M12 9v4"></path>
+                        <path
+                            d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0z">
+                        </path>
+                        <path d="M12 16h.01"></path>
+                    </svg>
+                    <h3>Are you sure?</h3>
+                    <div class="text-secondary">Do you really want to Deactivate this Customer?</div>
+                </div>
+                <div class="modal-footer">
+                    <div class="w-100">
+                        <div class="row">
+                            <div class="col">
+                                <a href="#" class="btn btn-3 w-100" data-bs-dismiss="modal">
+                                    Cancel
+                                </a>
+                            </div>
+                            <div class="col">
+                                <a href="#" class="btn btn-danger btn-4 w-100" data-bs-dismiss="modal">
+                                    Deactivate
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
