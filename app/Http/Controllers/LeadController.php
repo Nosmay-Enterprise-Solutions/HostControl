@@ -2,46 +2,54 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Lead;
 use App\Models\User;
 use App\Library\System;
 use App\Models\Partner;
-use App\Models\Customer;
-use App\Models\Location;
+use App\Models\LeadStatus;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
-class CustomerController extends Controller
+class LeadController extends Controller
 {
-    // Applications
-    public function customer_add()
+    public function lead_list()
     {
-        $partners = Partner::where('status', 1)->get();
-        return view('admin.customers.customer-add')->with([
-            'partners' => $partners,
+        $data = Lead::all();
+
+        return view('admin.leads.leads-list')->with([
+            'leads' => $data,
+            'status' => LeadStatus::all()
+        ]);
+    }
+
+    public function add_lead()
+    {
+        return view('admin.leads.lead-add')->with([
+            'partners' => Partner::where('status', 1)->get(),
             'id_types' => System::id_types()
         ]);
     }
 
-    public function process_customer_add(Request $io)
+    public function process_add_lead(Request $io)
     {
-        // dd($io);
-        $record = Customer::orderBy('id', 'desc')
-            ->first()->code;
-        if ( is_null($record) ){
-            $nextNum = 'NES'.'-000001';
+        $record = Lead::orderBy('id', 'desc')
+            ->get(); // dd($record);
+        if ( count($record) == 0 ){
+            $nextNum = 'NEL'.'-000001';
         } else {
-            $expNum = explode('-', $record);
+            $expNum = explode('-', $record->first()->code);
             $bar = count($expNum);
             if($bar == 2){
                 $innoumber = ($expNum[1] + 1);
                 $nextNum = $expNum[0] . '-' . sprintf('%06d', $innoumber);
             }else{
-                $nextNum = 'NES'.'-000001';
+                $nextNum = 'NEL'.'-000001';
             }
-        } // dd($nextNum);
+        }
 
         // Save User
         $user = new User;
-        $user->type = 'customer';
+        $user->type = 'lead';
         $user->role = 'sysCust';
         $user->email = $io->portal_login;
         $user->contact = $io->phonenumber;
@@ -51,7 +59,7 @@ class CustomerController extends Controller
 
         // Save Record
         if($io->category == 'corporate'){
-            $cust = Customer::create([
+            $lead = Lead::create([
                 'user_id' => $userid,
                 'code' => $nextNum,
                 'type' => $io->category,
@@ -67,7 +75,7 @@ class CustomerController extends Controller
                 'city' => $io->city,
             ]);
         }elseif($io->category == 'individual'){
-            $cust = Customer::create([
+            $lead = Lead::create([
                 'user_id' => $userid,
                 'code' => $nextNum,
                 'type' => $io->category,
@@ -85,41 +93,28 @@ class CustomerController extends Controller
             ]);
         }
 
-        return redirect()->route('admin-customer-list');
+        Session::flash('nesHC', ['msg' => '<b>Success!</b> Customer added successfully!', 'type' => 'success']);
+        return redirect()->route('admin-lead-list');
     }
 
-    public function customer_list()
+    public function lead_view($code)
     {
-        $data = Customer::all();
-        return view('admin.customers.customers-list')->with([
-            'customers' => $data,
-            'status' => System::mainStatus()
-        ]);
-    }
-
-    public function customer_view($code)
-    {
-        $data = Customer::where('id', $code)->first();
+        $data = Lead::where('code', $code)->first();
 
         if(is_null($data)){
             return back();
         }
 
-        return view('admin.customers.customer-view')->with([
-            'customer' => $data,
+        return view('admin.leads.lead-view')->with([
+            'lead' => $data,
             'partners' => Partner::where('status', 1)->get(),
             'id_types' => System::id_types(),
-            'status' => System::mainStatus()
+            'status' => LeadStatus::all()
         ]);
     }
 
-    public function get_location($id)
+    public function pico_form(Request $io)
     {
-        if($id == 'null'){
-            $data = Location::select('id', 'name')->where('status', 1)->get();
-        }else{
-            $data = Location::select('id', 'name')->where('partner_id', $id)->get();
-        }
-        return $data;
+        echo $io->data;
     }
 }

@@ -82,4 +82,12 @@ class AdministrationController extends Controller
 
         return back();
     }
+
+    // Finance
+    public function taxes()
+    {
+        return view('admin.administration.taxes')->with([
+
+        ]);
+    }
 }

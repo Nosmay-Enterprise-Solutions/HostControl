@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Tropo Farms Ltd')
+@section('title',  $lead->type == 'individual' ? $lead->firstname . ' ' . $lead->surname : $lead->companyname)
 
 @section('domain', 'Leads')
 
@@ -16,13 +16,21 @@
                         @yield('domain')
                     </div>
                     <h2 class="page-title">
-                        {{-- @yield('title') --}}
-                        Tropo Farms Ltd <span class="mx-1"> (#007) </span>
-                        <span class="badge badge-sm bg-primary mx-1">
-                            Remmitance
+                        @if ($lead->type == 'individual')
+                            {{ $lead->firstname }} {{ $lead->surname }}
+                        @else
+                            {{ $lead->companyname }}
+                        @endif
+                        <span class="mx-1"> (#{{ $lead->code }}) </span>
+                        <span class="badge badge-sm bg-{{ $status->where('code', $lead->status)->first()->color }} mx-1">
+                            {{ $status->where('code', $lead->status)->first()->name }}
                         </span>
                     </h2>
                 </div>
+
+                <!-- Page alerts -->
+                @include('layouts.branches.alerts')
+
                 <!-- Page title actions -->
                 {{-- <div class="col-auto ms-auto d-print-none">
                     <div class="btn-list">
@@ -545,7 +553,7 @@
                                                                 <td><input class="form-check-input m-0 align-middle"
                                                                         type="checkbox" aria-label="Select invoice"></td>
                                                                 <td><span class="text-muted">01</span></td>
-                                                                <td><a href="{{ route('admin-lead-view') }}"
+                                                                <td><a href="{{ route('admin-lead-view', 1) }}"
                                                                         class="text-reset" tabindex="-1">Survey
                                                                         Report</a></td>
                                                                 <td>

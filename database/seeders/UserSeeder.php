@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Location;
 use App\Models\User;
 use App\Models\Partner;
 use App\Models\UserRole;
@@ -20,6 +21,20 @@ class UserSeeder extends Seeder
         Partner::create([
             'name' => 'Nosmay Ghana',
             'status' => 1
+        ]);
+
+        Location::create([
+            'code' => Str::random(3).'-'.Str::random(3).'-'.Str::random(4),
+            'name' => 'Accra',
+            'status' => 1,
+            'partner_id' => 1
+        ]);
+
+        Location::create([
+            'code' => Str::random(3).'-'.Str::random(3).'-'.Str::random(4),
+            'name' => 'Kumasi',
+            'status' => 1,
+            'partner_id' => 1
         ]);
 
         UserRole::create([

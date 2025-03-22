@@ -2,7 +2,7 @@
 
 @section('title', 'All Recurring Services')
 
-@section('domain', 'Recurring Services')
+@section('domain', 'Service Plans')
 
 @section('content')
 

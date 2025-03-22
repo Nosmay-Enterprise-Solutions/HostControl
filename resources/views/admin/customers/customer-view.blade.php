@@ -16,10 +16,17 @@
                         @yield('domain')
                     </div>
                     <h2 class="page-title">
-                        {{-- @yield('title') --}}
-                        {{ $customer->companyname }} <span class="mx-1"> (#{{ $customer->code }}) </span>
+                        @if ($customer->type == 'individual')
+                            {{ $customer->firstname }} {{ $customer->surname }}
+                        @else
+                            {{ $customer->companyname }}
+                        @endif
+                        <span class="mx-1"> (#{{ $customer->code }}) </span>
                     </h2>
                 </div>
+
+                <!-- Page alerts -->
+                @include('layouts.branches.alerts')
             </div>
         </div>
     </div>

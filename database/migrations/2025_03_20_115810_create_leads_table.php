@@ -11,9 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::disableForeignKeyConstraints();
-
-        Schema::create('customers', function (Blueprint $table) {
+        Schema::create('leads', function (Blueprint $table) {
             $table->id();
             $table->string('code', 12)->unique();
             $table->enum('type', ['individual', 'corporate'])->default('individual');
@@ -33,13 +31,11 @@ return new class extends Migration
             $table->string('state')->nullable();
             $table->string('country')->nullable();
             $table->foreignId('location_id')->nullable()->constrained('locations');
-            $table->integer('status')->default(0);
+            $table->string('status')->default('new-enquiry');
             $table->foreignId('created_by')->nullable()->constrained('users');
             $table->foreignId('partner_id')->nullable()->constrained('partners');
             $table->timestamps();
         });
-
-        Schema::enableForeignKeyConstraints();
     }
 
     /**
@@ -47,6 +43,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('customers');
+        Schema::dropIfExists('leads');
     }
 };

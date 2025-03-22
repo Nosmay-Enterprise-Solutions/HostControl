@@ -52,4 +52,17 @@ class System
 
         return collect($id);
     }
+
+    static function getModules()
+    {
+        $modules = [
+            [
+                'name' => 'Leads',
+                'icon' => 'fas fa-user',
+                'route' => 'leads',
+            ]
+        ];
+
+        return collect($modules);
+    }
 }

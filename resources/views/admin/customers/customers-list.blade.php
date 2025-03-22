@@ -19,6 +19,10 @@
                         @yield('title')
                     </h2>
                 </div>
+
+                <!-- Page alerts -->
+                @include('layouts.branches.alerts')
+
                 <!-- Page title actions -->
                 <div class="col-auto ms-auto d-print-none">
                     <div class="btn-list">
@@ -165,34 +169,34 @@
                                                     </a>
 
                                                     @if ($customer->status != 1)
-                                                    <!-- Enable Action -->
-                                                    <a href="#" class="text-success me-1" title="Enable">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                            height="24" viewBox="0 0 24 24" fill="none"
-                                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                            stroke-linejoin="round"
-                                                            class="icon icon-tabler icons-tabler-outline icon-tabler-check">
-                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                            <path d="M5 12l5 5l10 -10" />
-                                                        </svg>
-                                                    </a>
+                                                        <!-- Enable Action -->
+                                                        <a href="#" class="text-success me-1" title="Enable">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                height="24" viewBox="0 0 24 24" fill="none"
+                                                                stroke="currentColor" stroke-width="2"
+                                                                stroke-linecap="round" stroke-linejoin="round"
+                                                                class="icon icon-tabler icons-tabler-outline icon-tabler-check">
+                                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                                <path d="M5 12l5 5l10 -10" />
+                                                            </svg>
+                                                        </a>
                                                     @endif
 
                                                     @if ($customer->status != 0)
-                                                    <!-- Disable Action -->
-                                                    <a href="#" class="text-danger me-1" data-bs-toggle="modal"
-                                                        data-bs-target="#modal-disable" title="Disable">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                            height="24" viewBox="0 0 24 24" fill="none"
-                                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                            stroke-linejoin="round"
-                                                            class="icon icon-tabler icons-tabler-outline icon-tabler-square-rounded-minus">
-                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                            <path d="M9 12h6" />
-                                                            <path
-                                                                d="M12 3c7.2 0 9 1.8 9 9s-1.8 9 -9 9s-9 -1.8 -9 -9s1.8 -9 9 -9z" />
-                                                        </svg>
-                                                    </a>
+                                                        <!-- Disable Action -->
+                                                        <a href="#" class="text-danger me-1" data-bs-toggle="modal"
+                                                            data-bs-target="#modal-disable" title="Disable">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                height="24" viewBox="0 0 24 24" fill="none"
+                                                                stroke="currentColor" stroke-width="2"
+                                                                stroke-linecap="round" stroke-linejoin="round"
+                                                                class="icon icon-tabler icons-tabler-outline icon-tabler-square-rounded-minus">
+                                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                                <path d="M9 12h6" />
+                                                                <path
+                                                                    d="M12 3c7.2 0 9 1.8 9 9s-1.8 9 -9 9s-9 -1.8 -9 -9s1.8 -9 9 -9z" />
+                                                            </svg>
+                                                        </a>
                                                     @endif
 
                                                     <!-- Delete Action -->
@@ -216,7 +220,7 @@
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="7" class="text-center">No Customers Found</td>
+                                            <td colspan="10" class="text-center">No Customer Found</td>
                                         </tr>
                                     @endforelse
                                 </tbody>

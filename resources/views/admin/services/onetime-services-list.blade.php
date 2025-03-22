@@ -2,7 +2,7 @@
 
 @section('title', 'All Onetime Services')
 
-@section('domain', 'Onetime Services')
+@section('domain', 'Service Plans')
 
 @section('content')
 

@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('modules', function (Blueprint $table) {
+        Schema::create('lead_statuses', function (Blueprint $table) {
             $table->id();
-            $table->string('code', 12)->unique();
-            $table->string('name');
-            $table->text('description')->nullable();
-            $table->text('routes');
-            $table->boolean('state')->default(1);
+            $table->string('code')->unique();
+            $table->string('name')->unique();
+            $table->string('color');
             $table->timestamps();
         });
     }
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('modules');
+        Schema::dropIfExists('lead_statuses');
     }
 };

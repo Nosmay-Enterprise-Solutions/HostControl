@@ -4,12 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Module extends Model
+class LeadStatus extends Model
 {
     protected $fillable = [
+        'code',
         'name',
-        'description',
-        'routes',
-        'state',
+        'color'
     ];
 }

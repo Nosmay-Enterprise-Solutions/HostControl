@@ -19,6 +19,10 @@
                         @yield('title')
                     </h2>
                 </div>
+
+                <!-- Page alerts -->
+                @include('layouts.branches.alerts')
+
                 <!-- Page title actions -->
                 <div class="col-auto ms-auto d-print-none">
                     <div class="btn-list">
@@ -56,7 +60,17 @@
             <div class="row row-card">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header justify-content-end">
+                        <div class="card-header d-flex justify-content-between">
+                            <h3 class="card-title">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-script"
+                                    width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path
+                                        d="M17 20h-11a3 3 0 0 1 0 -6h11a3 3 0 0 0 0 6h1a3 3 0 0 0 3 -3v-11a2 2 0 0 0 -2 -2h-10a2 2 0 0 0 -2 2v8">
+                                    </path>
+                                </svg> | @yield('title')
+                            </h3>
                             <div class="">
                                 {{-- <label class="form-label">Toolbar</label> --}}
                                 <div class="btn-group w-100" role="group">
@@ -162,8 +176,8 @@
                             <table class="table card-table table-vcenter text-nowrap datatable">
                                 <thead>
                                     <tr>
-                                        <th class="w-1"><input class="form-check-input m-0 align-middle"
-                                                type="checkbox">
+                                        <th class="w-1">
+                                            <input class="form-check-input m-0 align-middle" type="checkbox">
                                         </th>
                                         <th class="w-1">ID</th>
                                         <th>Status</th>
@@ -176,51 +190,72 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td><input class="form-check-input m-0 align-middle" type="checkbox"
-                                                aria-label="Select invoice"></td>
-                                        <td><span class="text-muted">01</span></td>
-                                        <td>
-                                            <span class="badge badge-outline text-primary">New Enquiry</span>
-                                        </td>
-                                        <td><a href="{{ route('admin-lead-view') }}" class="text-reset"
-                                                tabindex="-1">Trop Farms Ltd</a></td>
-                                        <td>
-                                            17th Sept, 23
-                                        </td>
-                                        <td>
-                                            233248636888
-                                        </td>
-                                        <td>mail@mail.com</td>
-                                        <td>
-                                            17th Sept, 23
-                                        </td>
-                                        <td class="text-end">
-                                            <div class="d-flex justify-content-ecenter gap-2">
-                                                <!-- View Action -->
-                                                <a href="{{ route('admin-lead-view') }}"
-                                                    class="text-primary me-1" title="View">
-                                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
-                                                </a>
+                                    @forelse ($leads as $lead)
+                                        <tr>
+                                            <td><input class="form-check-input m-0 align-middle" type="checkbox"
+                                                    aria-label="Select invoice"></td>
+                                            <td><span class="text-muted">{{ $loop->iteration }}</span></td>
+                                            <td>
+                                                <span
+                                                    class="badge badge-outline text-{{ $status->where('code', $lead->status)->first()->color }}">{{ $status->where('code', $lead->status)->first()->name }}</span>
+                                            </td>
+                                            <td>
+                                                @if ($lead->type == 'individual')
+                                                    <a href="{{ route('admin-lead-view', ['code' => $lead->code]) }}"
+                                                        class="text-reset" tabindex="-1">{{ $lead->firstname }}
+                                                        {{ $lead->surname }}</a>
+                                            </td>
+                                        @else
+                                            <a href="{{ route('admin-lead-view', 1) }}" class="text-reset"
+                                                tabindex="-1">{{ $lead->companyname }}</a></td>
+                                    @endif
+                                    <td>
+                                        {{ $lead->created_at->format('d M, Y') }}
+                                    </td>
+                                    <td>{{ $lead->contact }}</td>
+                                    <td>{{ $lead->email }}</td>
+                                    <td>
+                                        {{ $lead->updated_at->format('d M, Y') }}
+                                    </td>
+                                    <td class="text-end">
+                                        <div class="d-flex justify-content-ecenter gap-2">
+                                            <!-- View Action -->
+                                            <a href="{{ route('admin-lead-view', ['code' => $lead->code]) }}"
+                                                class="text-primary me-1" title="View">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="icon icon-tabler icons-tabler-outline icon-tabler-eye">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                    <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+                                                    <path
+                                                        d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" />
+                                                </svg>
+                                            </a>
 
-                                                <!-- Delete Action -->
-                                                <a href="#" class="text-danger me-1" data-bs-toggle="modal"
-                                                    data-bs-target="#modal-danger" title="Delete">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                        class="icon icon-tabler icons-tabler-outline icon-tabler-trash">
-                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                        <path d="M4 7l16 0" />
-                                                        <path d="M10 11l0 6" />
-                                                        <path d="M14 11l0 6" />
-                                                        <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
-                                                        <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
-                                                    </svg>
-                                                </a>
-                                            </div>
-                                        </td>
+                                            <!-- Delete Action -->
+                                            <a href="#" class="text-danger me-1" data-bs-toggle="modal"
+                                                data-bs-target="#modal-danger" title="Delete">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="icon icon-tabler icons-tabler-outline icon-tabler-trash">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                    <path d="M4 7l16 0" />
+                                                    <path d="M10 11l0 6" />
+                                                    <path d="M14 11l0 6" />
+                                                    <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                                                    <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                                                </svg>
+                                            </a>
+                                        </div>
+                                    </td>
                                     </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="9" class="text-center">No Lead Found</td>
+                                    </tr>
+                                    @endforelse
                                 </tbody>
                             </table>
                         </div>

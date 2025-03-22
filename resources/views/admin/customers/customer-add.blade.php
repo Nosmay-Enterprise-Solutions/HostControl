@@ -19,6 +19,9 @@
                         @yield('title')
                     </h2>
                 </div>
+
+                <!-- Page alerts -->
+                @include('layouts.branches.alerts')
             </div>
         </div>
     </div>

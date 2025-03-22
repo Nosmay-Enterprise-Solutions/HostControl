@@ -19,13 +19,14 @@
                     <a href="." class="navbar-brand navbar-brand-autodark"><img src="{{ asset('bank/logo/logo.svg') }}"
                             height="64" alt=""></a>
                 </div>
+                @include('layouts.branches.alerts')
                 <h2 class="h3 text-center mb-3">
                     Sign In
                 </h2>
                 <form method="post" autocomplete="off" novalidate>@csrf
                     <div class="mb-3">
                         <label class="form-label">Email Address</label>
-                        <input type="email" class="form-control" placeholder="Your Email" name="email" value="{{ old('email') }}" required>
+                        <input type="email" class="form-control" placeholder="Your Email" name="email" value="{{ old('email') }}" autofocus required>
                         <input type="hidden" name="status" id="status" value="1">
                     </div>
                     <div class="mb-2">

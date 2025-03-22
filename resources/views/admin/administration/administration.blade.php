@@ -85,6 +85,7 @@
 
                     <!-- Page body -->
                     <div class="page-body">
+
                         <!-- Company Menu -->
                         <div class="row mb-3">
                             <div class="col-12">
@@ -92,7 +93,7 @@
                                     <div class="card-body">
                                         <div class="">
                                             <h3 class="heading">Company</h3>
-                                            <div class="badges-list">
+                                            <div class="badges-list my-3">
                                                 <div class="custom-link col-sm-6 col-md-2 ">
                                                     <a href="{{ route('admin.administration.administrators') }}"
                                                         title="Administrators">
@@ -148,7 +149,8 @@
                                                     </a>
                                                 </div>
                                                 <div class="custom-link col-sm-6 col-md-2 ">
-                                                    <a href="{{route('admin.administration.locations')}}" title="Locations">
+                                                    <a href="{{ route('admin.administration.locations') }}"
+                                                        title="Locations">
                                                         <span class="button-title"><svg xmlns="http://www.w3.org/2000/svg"
                                                                 width="24" height="24" viewBox="0 0 24 24"
                                                                 fill="none" stroke="currentColor" stroke-width="2"
@@ -192,13 +194,46 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Finance Menu -->
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        <div class="">
+                                            <h3 class="heading">Finance</h3>
+                                            <div class="badges-list my-3">
+                                                <div class="custom-link col-sm-6 col-md-2 ">
+                                                    <a href="{{ route('admin.administration.taxes') }}"
+                                                        title="Taxes">
+                                                        <span class="button-title"><svg xmlns="http://www.w3.org/2000/svg"
+                                                                width="24" height="24" viewBox="0 0 24 24"
+                                                                fill="none" stroke="currentColor" stroke-width="2"
+                                                                stroke-linecap="round" stroke-linejoin="round"
+                                                                class="icon icon-tabler icons-tabler-outline icon-tabler-users">
+                                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                                <path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
+                                                                <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+                                                                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                                                                <path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />
+                                                            </svg> Taxes</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <!-- Logs Menu -->
                         <div class="row mb-3">
                             <div class="col-12">
                                 <div class="card mb-3">
                                     <div class="card-body">
                                         <h3 class="heading">Logs</h3>
-                                        <div class="badges-list">
+                                        <div class="badges-list my-3">
                                             <div class="custom-link col-sm-6 col-md-2 ">
                                                 <a href="{{ route('admin.administration.administrators') }}"
                                                     title="Administrators">
@@ -241,8 +276,7 @@
                                                 </a>
                                             </div>
                                             <div class="custom-link col-sm-6 col-md-2 ">
-                                                <a href=""
-                                                    title="Administrators">
+                                                <a href="" title="Administrators">
                                                     <span class="button-title"><svg xmlns="http://www.w3.org/2000/svg"
                                                             width="24" height="24" viewBox="0 0 24 24"
                                                             fill="none" stroke="currentColor" stroke-width="2"
@@ -272,7 +306,7 @@
                                                 </a>
                                             </div>
                                             <div class="custom-link col-sm-6 col-md-2 ">
-                                                <a href="{{route('admin.administration.locations')}}" title="Locations">
+                                                <a href="{{ route('admin.administration.locations') }}" title="Locations">
                                                     <span class="button-title">Locations</span>
                                                 </a>
                                             </div>

@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
@@ -40,6 +41,8 @@ class AuthController extends Controller
             $io->session()->regenerate();
             return redirect()->route('admin-dashboard');
         }
+
+        Session::flash('nesHC', ['msg' => '<b>Error!</b> Credentials Mismatch!', 'type' => 'error']);
 
         return back()->withErrors([
             'email' => 'Credentials Mismatch. Try Again!',

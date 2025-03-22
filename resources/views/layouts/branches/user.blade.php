@@ -5,7 +5,15 @@
             style="background-image: url({{asset('bank/avatar/default.jpg')}})"></span>
         <div class="d-none d-xl-block ps-2">
             <div>
-                {{ auth()->user()->fname }}
+                @php
+                    if(auth()->user()->type == 'admin'){
+                        $adminuser = App\Models\Administrator::where('user_id', auth()->user()->id)->first();
+                        $name = $adminuser->fname.''.$adminuser->lame;
+                    }elseif(auth()->user()->type == 'customer'){
+                        $name = '';
+                    }
+                @endphp
+                {{ $name }}
             </div>
             <div class="mt-1 small text-muted">Administrator</div>
         </div>

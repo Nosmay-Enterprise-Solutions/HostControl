@@ -1,3 +1,6 @@
+@php
+    $module = App\Models\Module::all();
+@endphp
 <div class="collapse navbar-collapse" id="sidebar-menu">
     <ul class="navbar-nav pt-lg-3">
         <!-- Dashboard -->
@@ -21,6 +24,7 @@
             </a>
         </li>
         <!-- Customers -->
+        @if ($module->where('id', 1)->first()->state == 1)
         <li class="nav-item dropdown py-1">
             <a class="nav-link dropdown-toggle {{ request()->segment(1) == 'customers' ? 'show' : '' }}"
                 href="#navbar-base" data-bs-toggle="dropdown" data-bs-auto-close="false" role="button"
@@ -54,9 +58,11 @@
                 </div>
             </div>
         </li>
+        @endif
         <!-- Leads -->
+        @if ($module->where('id', 2)->first()->state == 1)
         <li class="nav-item dropdown py-1">
-            <a class="nav-link dropdown-toggle {{ request()->segment(1) == 'preferences' ? 'show' : '' }}"
+            <a class="nav-link dropdown-toggle {{ request()->segment(1) == 'leads' ? 'show' : 'hidden' }}"
                 href="#navbar-base" data-bs-toggle="dropdown" data-bs-auto-close="false" role="button"
                 aria-expanded="false">
                 <span
@@ -80,16 +86,13 @@
                     Leads
                 </span>
             </a>
-            <div class="dropdown-menu {{ request()->segment(1) == 'preferences' ? 'show' : '' }}">
+            <div class="dropdown-menu {{ request()->segment(1) == 'leads' ? 'show' : 'hidden' }}">
                 <div class="dropdown-menu-columns">
                     <div class="dropdown-menu-column">
                         <a class="dropdown-item" href="">
                             Dashboard
                         </a>
-                        <a class="dropdown-item" href="{{ route('admin-lead-add') }}">
-                            Add Lead
-                        </a>
-                        <a class="dropdown-item" href="{{ route('admin-lead-list') }}">
+                        <a class="dropdown-item {{ request()->segment(2) == 'all-leads' ? 'active' : 'inactive' }}" href="{{ route('admin-lead-list') }}">
                             List
                         </a>
                         <a class="dropdown-item" href="">
@@ -99,7 +102,9 @@
                 </div>
             </div>
         </li>
+        @endif
         <!-- Tickets -->
+        @if ($module->where('id', 3)->first()->state == 1)
         <li class="nav-item dropdown py-1">
             <a class="nav-link dropdown-toggle {{ request()->segment(1) == 'preferences' ? 'show' : '' }}"
                 href="#navbar-base" data-bs-toggle="dropdown" data-bs-auto-close="false" role="button"
@@ -145,7 +150,9 @@
                 </div>
             </div>
         </li>
+        @endif
         <!-- Finance -->
+        @if ($module->where('id', 4)->first()->state == 1)
         <li class="nav-item dropdown py-1">
             <a class="nav-link dropdown-toggle {{ request()->segment(1) == 'preferences' ? 'show' : '' }}"
                 href="#navbar-base" data-bs-toggle="dropdown" data-bs-auto-close="false" role="button"
@@ -196,7 +203,9 @@
                 </div>
             </div>
         </li>
+        @endif
         <!-- Messages -->
+        @if ($module->where('id', 5)->first()->state == 1)
         <li class="nav-item dropdown py-1">
             <a class="nav-link dropdown-toggle {{ request()->segment(1) == 'preferences' ? 'show' : '' }}"
                 href="#navbar-base" data-bs-toggle="dropdown" data-bs-auto-close="false" role="button"
@@ -238,9 +247,11 @@
                 </div>
             </div>
         </li>
+        @endif
         <!-- Subscriptions-->
+        @if ($module->where('id', 6)->first()->state == 1)
         <li class="nav-item py-1">
-            <a class="nav-link" href="{{ route('admin-subscriptions-list') }}">
+            <a class="nav-link {{ (Route::is('admin-subscriptions-list')) ? 'active' : 'not' }}" href="{{ route('admin-subscriptions-list') }}">
                 <span
                     class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-layout-dashboard"
@@ -258,9 +269,11 @@
                 </span>
             </a>
         </li>
+        @endif
         <!-- Service Plans -->
+        @if ($module->where('id', 7)->first()->state == 1)
         <li class="nav-item dropdown py-1">
-            <a class="nav-link dropdown-toggle {{ request()->segment(1) == 'preferences' ? 'show' : '' }}"
+            <a class="nav-link dropdown-toggle {{ request()->segment(1) == 'service-plans' ? 'show' : 'hidden' }}"
                 href="#navbar-base" data-bs-toggle="dropdown" data-bs-auto-close="false" role="button"
                 aria-expanded="false">
                 <span
@@ -284,25 +297,27 @@
                     Service Plans
                 </span>
             </a>
-            <div class="dropdown-menu {{ request()->segment(1) == 'preferences' ? 'show' : '' }}">
+            <div class="dropdown-menu {{ request()->segment(1) == 'service-plans' ? 'show' : 'hidden' }}">
                 <div class="dropdown-menu-columns">
                     <div class="dropdown-menu-column">
-                        <a class="dropdown-item" href="{{ route('admin-recurring-services-list') }}">
+                        <a class="dropdown-item {{ (request()->segment(2) == 'recurring-services') ? 'active' : 'not' }}" href="{{ route('admin-recurring-services-list') }}">
                             Recurring
                         </a>
-                        <a class="dropdown-item" href="{{ route('admin-onetime-services-list') }}">
+                        <a class="dropdown-item {{ (request()->segment(2) == 'onetime-services') ? 'active' : 'not' }}" href="{{ route('admin-onetime-services-list') }}">
                             One-Time
                         </a>
-                        <a class="dropdown-item" href="{{ route('admin-bundled-services-list') }}">
+                        <a class="dropdown-item {{ (request()->segment(2) == 'bundled-services') ? 'active' : 'not' }}" href="{{ route('admin-bundled-services-list') }}">
                             Bundles
                         </a>
                     </div>
                 </div>
             </div>
         </li>
+        @endif
         <!-- Admininstration -->
+        @if ($module->where('id', 8)->first()->state == 1)
         <li class="nav-item py-1">
-            <a class="nav-link {{(Route::is('admin.administration')) ? 'active' : 'not'}}" href="{{ route('admin.administration') }}">
+            <a class="nav-link {{ (request()->segment(1) == 'administration') ? 'active' : 'not'}}" href="{{ route('admin.administration') }}">
                 <span
                     class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-layout-dashboard"
@@ -320,9 +335,11 @@
                 </span>
             </a>
         </li>
+        @endif
         <!-- Configurations -->
+        @if ($module->where('id', 9)->first()->state == 1)
         <li class="nav-item py-1">
-            <a class="nav-link @if (Route::is('admin-dashboard')) active @endif" href="{{ route('admin-dashboard') }}">
+            <a class="nav-link {{ (request()->segment(1) == 'configuration') ? 'active' : 'not'}}" href="{{ route('admin.configuration') }}">
                 <span
                     class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-layout-dashboard"
@@ -340,6 +357,6 @@
                 </span>
             </a>
         </li>
-
+        @endif
     </ul>
 </div>
